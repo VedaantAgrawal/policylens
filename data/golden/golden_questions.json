@@ -1,0 +1,399 @@
+[
+  {
+    "question_id": "q001",
+    "question": "Under the NAIC Standard Nonforfeiture Law for Life Insurance, within how many days after a premium due date must a policyholder request a paid-up nonforfeiture benefit following default?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_808_1"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: 60 days after the due date of the premium in default."
+  },
+  {
+    "question_id": "q002",
+    "question": "Under the NAIC Standard Valuation Law, who is responsible for annually valuing the reserve liabilities of life insurance policies issued before the operative date of the Valuation Manual?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_820_3"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the commissioner."
+  },
+  {
+    "question_id": "q003",
+    "question": "How does the NAIC Insurance Data Security Model Law define an 'Authorized Individual'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_668_1"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q004",
+    "question": "What standard of conduct does the NAIC Suitability in Annuity Transactions Model Regulation require producers to meet when recommending an annuity?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_275_1"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: act in the best interest of the consumer."
+  },
+  {
+    "question_id": "q005",
+    "question": "What is the stated purpose of the NAIC Life Insurance Illustrations Model Regulation?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_582_0"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q006",
+    "question": "Under the NAIC Risk Management and ORSA Model Act, how frequently must an insurer conduct an Own Risk and Solvency Assessment at minimum?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_505_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: no less than annually, and also when there are significant changes to risk profile."
+  },
+  {
+    "question_id": "q007",
+    "question": "Under the NAIC Credit for Reinsurance Model Law, when is a domestic ceding insurer allowed credit for reinsurance ceded?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_785_1"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q008",
+    "question": "How does the NAIC Risk-Based Capital (RBC) Model Act define a 'Corrective Order'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_312_1"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q009",
+    "question": "Under the NAIC Unfair Trade Practices Act, under what conditions does a practice defined in Section 4 constitute an unfair trade practice under Section 3?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_880_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: if committed flagrantly and consciously disregarding the Act, or committed with such frequency as to indicate a general business practice."
+  },
+  {
+    "question_id": "q010",
+    "question": "What does the NAIC Annuity Disclosure Model Regulation define as the 'Buyer's Guide'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_245_3"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q011",
+    "question": "What is the stated purpose of the NAIC Life Insurance and Annuities Replacement Model Regulation?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_613_1"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q012",
+    "question": "Under the NAIC Standard Nonforfeiture Law for Individual Deferred Annuities, what must a company grant upon cessation of payment of considerations under a contract?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_805_1"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: a paid-up annuity benefit on a plan stipulated in the contract."
+  },
+  {
+    "question_id": "q013",
+    "question": "How does the NAIC Insurance Data Security Model Law define a 'Third-Party Service Provider'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_668_5"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q014",
+    "question": "Under the NAIC Insurance Holding Company System Model Regulation, which companies must complete the Stockholder Information Supplement?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_500_0"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: all stock companies incorporated in the US with 100 or more stockholders."
+  },
+  {
+    "question_id": "q015",
+    "question": "How does the NAIC Risk Management and ORSA Model Act define 'insurance group' for purposes of conducting an ORSA?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_505_1"
+    ],
+    "category": "naic_model_law",
+    "notes": ""
+  },
+  {
+    "question_id": "q016",
+    "question": "What is the official title given to NAIC Model #820 under its own Section 1?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_820_0"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the Standard Valuation Law."
+  },
+  {
+    "question_id": "q017",
+    "question": "According to Brighthouse Financial's 10-K, how does the company describe its position in the annuity and life insurance market?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "sec10k_BHF_29"
+    ],
+    "category": "sec_10k",
+    "notes": "Answer: one of the largest providers of annuity and life insurance products in the U.S."
+  },
+  {
+    "question_id": "q018",
+    "question": "According to Unum Group's 10-K, in which countries does the company primarily operate?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "sec10k_UNM_34"
+    ],
+    "category": "sec_10k",
+    "notes": "Answer: United States, United Kingdom, Poland, and to a limited extent certain other countries."
+  },
+  {
+    "question_id": "q019",
+    "question": "According to Lincoln National's 10-K risk factors, what could a downgrade in the company's financial strength or credit ratings limit or increase?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "sec10k_LNC_71"
+    ],
+    "category": "sec_10k",
+    "notes": "Answer: could limit ability to market products, increase number/value of policies surrendered, hurt creditor relationships."
+  },
+  {
+    "question_id": "q020",
+    "question": "What does Corebridge Financial's 10-K risk factors summary say its business is subject to?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "sec10k_CRBG_159"
+    ],
+    "category": "sec_10k",
+    "notes": ""
+  },
+  {
+    "question_id": "q021",
+    "question": "According to MetLife's 10-K, what are the four key areas of opportunity the company is prioritizing for growth?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "sec10k_MET_66"
+    ],
+    "category": "sec_10k",
+    "notes": "Answer: extend leadership in Group Benefits; capitalize on retirement platform; accelerate growth in asset management; expand in high-growth international markets."
+  },
+  {
+    "question_id": "q022",
+    "question": "According to Prudential Financial's 10-K, what are the company's principal operating segments/businesses?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "sec10k_PRU_80"
+    ],
+    "category": "sec_10k",
+    "notes": "Answer: PGIM, U.S. Businesses (Retirement Strategies, Group Insurance, Individual Life), International Businesses, Closed Block division, Corporate and Other."
+  },
+  {
+    "question_id": "q023",
+    "question": "What New York statute did Chapter 427 of the Laws of 2025 amend regarding limitations on expenses for life insurance and annuity business?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ny_000_2"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: Insurance Law Section 4228."
+  },
+  {
+    "question_id": "q024",
+    "question": "According to NY DFS Insurance Circular Letter No. 4 (2025), what types of unexpected events does the disaster planning circular letter say authorized life insurance companies must be prepared to respond to?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ny_005_2"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: crippling storms, floods, terrorist attacks, cybersecurity breaches, pandemics."
+  },
+  {
+    "question_id": "q025",
+    "question": "What did TDI's Commissioner's Bulletin B-0006-26 say Texas insurers should provide to policyholders regarding FEMA assistance after the July 2026 severe storms and flooding?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_000_3",
+      "state_tx_000_4"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: FEMA contact information and a link to DisasterAssistance.gov."
+  },
+  {
+    "question_id": "q026",
+    "question": "According to TDI's bulletin on artificial intelligence, what must regulated entities using AI-supported decisions comply with?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_003_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: all applicable insurance laws and regulations, including Texas Insurance Code Chapter 541 on unfair trade practices."
+  },
+  {
+    "question_id": "q027",
+    "question": "What does TDI's bulletin on House Bill 2516 provide for Texans who qualify for Medicare before age 65 due to ESRD or ALS?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_012_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: new Medicare supplement enrollment and rating protections."
+  },
+  {
+    "question_id": "q028",
+    "question": "Under California's SB 495 amendment to Insurance Code section 2051.5, what does the bulletin clarify for insureds during a declared state of emergency?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ca_000_0"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: the statutorily prescribed timeline for insureds to provide proof of loss to insurers."
+  },
+  {
+    "question_id": "q029",
+    "question": "According to California Bulletin 2026-2, what are property and casualty insurers subject to Proposition 103 prohibited from doing in their rate templates and exhibits?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ca_003_0"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: modifying formulas in rate templates and exhibits."
+  },
+  {
+    "question_id": "q030",
+    "question": "Under California Insurance Code section 675.1(b)(1) as referenced in the Hughes Fire bulletin, how long is an insurer barred from cancelling or refusing to renew a residential property policy after a state of emergency declaration?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ca_017_0"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: one year after the declaration of a state of emergency, for properties in or adjacent to the fire perimeter."
+  },
+  {
+    "question_id": "q031",
+    "question": "What is Northwestern Mutual's current risk-based capital (RBC) ratio?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Northwestern Mutual is a mutual company and does not file 10-Ks with the SEC; not in corpus."
+  },
+  {
+    "question_id": "q032",
+    "question": "What does the Florida Office of Insurance Regulation's most recent bulletin say about hurricane claim deadlines?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Florida is not one of the three states (NY/CA/TX) in the corpus."
+  },
+  {
+    "question_id": "q033",
+    "question": "What was MassMutual's total assets as of the most recent quarter?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "MassMutual is a mutual company, not in the SEC 10-K corpus, and no quarterly disclosures are in the corpus at all."
+  },
+  {
+    "question_id": "q034",
+    "question": "What is the NAIC model law number for regulating AI-based underwriting models?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "No such model law exists in the curated NAIC set (or, to our knowledge, at all as a dedicated model law) \u2014 trap question."
+  },
+  {
+    "question_id": "q035",
+    "question": "What did Massachusetts Division of Insurance Bulletin 2026-04 state about long-term care rate increases?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Massachusetts was excluded from the corpus (mass.gov blocks automated access); no MA documents present."
+  },
+  {
+    "question_id": "q036",
+    "question": "What was Prudential Financial's total revenue for the third quarter of 2026?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "10-K filings are annual; no quarterly 2026 Q3 figures are in the corpus."
+  },
+  {
+    "question_id": "q037",
+    "question": "According to the Washington state Office of the Insurance Commissioner, what are the licensing requirements for public adjusters?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Washington state is not one of the three states in the corpus."
+  },
+  {
+    "question_id": "q038",
+    "question": "What is the minimum wage in the state of New York?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Out of domain entirely \u2014 not an insurance/regulatory question the corpus addresses."
+  },
+  {
+    "question_id": "q039",
+    "question": "What does TDI's bulletin say about health insurance rate review for ACA marketplace plans in 2027?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Speculative/future-dated; the TX bulletins in corpus run through mid-2026 and don't cover this topic."
+  },
+  {
+    "question_id": "q040",
+    "question": "What is Corebridge Financial's dividend per share declared for fiscal year 2025?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Specific financial figure not grounded in any sampled/verified chunk; treated as a precision trap."
+  },
+  {
+    "question_id": "q041",
+    "question": "Under the NAIC Long-Term Care Insurance Model Act, what are the minimum benefit trigger requirements?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Model #640 (Long-Term Care Insurance Model Act) was deliberately excluded from the curated NAIC list; tests whether the system wrongly pulls in adjacent long-term-care content instead of refusing."
+  },
+  {
+    "question_id": "q042",
+    "question": "What is the current federal excise tax rate on life insurance premiums paid to foreign insurers?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "A federal tax code question outside the scope of the state/NAIC/SEC regulatory corpus."
+  }
+]
