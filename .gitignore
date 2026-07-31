@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Raw fetched documents are large and reproducible from ingest scripts + manifest.
+data/raw/
+data/processed/*.jsonl
+
+# Env / secrets
+.env
+*.local
+
+# OS
+.DS_Store
