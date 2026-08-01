@@ -20,14 +20,19 @@ _STAGE_FACTORIES = {}
 def _register_stages():
     from policylens.retrieval.bm25 import Bm25Retriever
     from policylens.retrieval.dense import DenseRetriever
+    from policylens.retrieval.hybrid import HybridRetriever
 
     _STAGE_FACTORIES["s0_bm25"] = Bm25Retriever
     _STAGE_FACTORIES["s1_dense"] = DenseRetriever
+    _STAGE_FACTORIES["s2_hybrid"] = HybridRetriever
+
+
+AVAILABLE_STAGES = ("s0_bm25", "s1_dense", "s2_hybrid")
 
 
 def main() -> None:
-    if len(sys.argv) != 2 or sys.argv[1] not in ("s0_bm25", "s1_dense"):
-        print(f"Usage: python -m policylens.eval.run_stage <stage>\nAvailable: s0_bm25, s1_dense")
+    if len(sys.argv) != 2 or sys.argv[1] not in AVAILABLE_STAGES:
+        print(f"Usage: python -m policylens.eval.run_stage <stage>\nAvailable: {', '.join(AVAILABLE_STAGES)}")
         sys.exit(1)
 
     _register_stages()

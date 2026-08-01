@@ -1,0 +1,270 @@
+{
+  "retriever": "s2_hybrid",
+  "scored_at": "2026-08-01T04:28:20.666495+00:00",
+  "num_answerable_questions": 30,
+  "num_unanswerable_questions": 12,
+  "aggregate": {
+    "recall_at_5": {
+      "mean": 0.6333333333333333,
+      "ci_lower": 0.4666666666666667,
+      "ci_upper": 0.8
+    },
+    "recall_at_10": {
+      "mean": 0.7666666666666667,
+      "ci_lower": 0.6,
+      "ci_upper": 0.9
+    },
+    "mrr": {
+      "mean": 0.49489417989417983,
+      "ci_lower": 0.34462896825396827,
+      "ci_upper": 0.6410052910052909
+    },
+    "ndcg_at_10": {
+      "mean": 0.5557765765980648,
+      "ci_lower": 0.41242492613861736,
+      "ci_upper": 0.6894909810838439
+    }
+  },
+  "per_query": [
+    {
+      "question_id": "q001",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q002",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q003",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q004",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5
+    },
+    {
+      "question_id": "q005",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q006",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q007",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q008",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.14285714285714285,
+      "ndcg_at_10": 0.3333333333333333
+    },
+    {
+      "question_id": "q009",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.1111111111111111,
+      "ndcg_at_10": 0.3010299956639812
+    },
+    {
+      "question_id": "q010",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.25,
+      "ndcg_at_10": 0.43067655807339306
+    },
+    {
+      "question_id": "q011",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.14285714285714285,
+      "ndcg_at_10": 0.3333333333333333
+    },
+    {
+      "question_id": "q012",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.16666666666666666,
+      "ndcg_at_10": 0.3562071871080222
+    },
+    {
+      "question_id": "q013",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q014",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q015",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q016",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q017",
+      "category": "sec_10k",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q018",
+      "category": "sec_10k",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q019",
+      "category": "sec_10k",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q020",
+      "category": "sec_10k",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q021",
+      "category": "sec_10k",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q022",
+      "category": "sec_10k",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q023",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q024",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q025",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 0.8772153153380493
+    },
+    {
+      "question_id": "q026",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q027",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q028",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q029",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q030",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.2,
+      "ndcg_at_10": 0.38685280723454163
+    }
+  ]
+}
