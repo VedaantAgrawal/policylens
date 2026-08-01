@@ -1,0 +1,414 @@
+{
+  "retriever": "s2_hybrid",
+  "generation_model": "claude-sonnet-5",
+  "judge_model": "claude-haiku-4-5",
+  "scored_at": "2026-08-01T04:35:22.731556+00:00",
+  "num_answerable_questions": 30,
+  "num_unanswerable_questions": 12,
+  "aggregate": {
+    "refusal_accuracy": {
+      "mean": 0.9166666666666666,
+      "ci_lower": 0.75,
+      "ci_upper": 1.0,
+      "n": 12
+    },
+    "citation_precision": {
+      "mean": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "n": 25
+    },
+    "groundedness": {
+      "mean": 0.9047619047619048,
+      "ci_lower": 0.7619047619047619,
+      "ci_upper": 1.0,
+      "n": 21
+    },
+    "false_refusal_rate": {
+      "mean": 0.3,
+      "ci_lower": 0.13333333333333333,
+      "ci_upper": 0.4666666666666667,
+      "n": 30
+    }
+  },
+  "per_query": [
+    {
+      "question_id": "q001",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q002",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q003",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q004",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": false
+    },
+    {
+      "question_id": "q005",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q006",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q007",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q008",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q009",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q010",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q011",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q012",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q013",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q014",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q015",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q016",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q017",
+      "category": "sec_10k",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q018",
+      "category": "sec_10k",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q019",
+      "category": "sec_10k",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q020",
+      "category": "sec_10k",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q021",
+      "category": "sec_10k",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q022",
+      "category": "sec_10k",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q023",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q024",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": false
+    },
+    {
+      "question_id": "q025",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q026",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q027",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q028",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q029",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q030",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true
+    },
+    {
+      "question_id": "q031",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q032",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q033",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q034",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q035",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q036",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q037",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q038",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q039",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q040",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": true,
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q041",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    },
+    {
+      "question_id": "q042",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null
+    }
+  ]
+}
