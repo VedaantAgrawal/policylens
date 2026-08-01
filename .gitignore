@@ -6,9 +6,10 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Raw fetched documents are large and reproducible from ingest scripts + manifest.
+# Raw fetched documents and derived artifacts (chunks, embeddings) are all
+# reproducible from ingest/chunk/embed scripts + the committed manifest.
 data/raw/
-data/processed/*.jsonl
+data/processed/
 
 # Env / secrets
 .env
