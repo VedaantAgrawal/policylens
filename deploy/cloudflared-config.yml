@@ -1,0 +1,12 @@
+# Cloudflare Tunnel config. Safe to commit: the tunnel ID here is not a
+# secret — the actual credential (private key) lives only in
+# ~/.cloudflared/<tunnel-id>.json on the host running the tunnel, which is
+# never committed. Run with:
+#   cloudflared tunnel --config deploy/cloudflared-config.yml run policylens
+tunnel: 3bbc01c7-f1d1-41f7-adc9-646497a601b8
+credentials-file: /Users/vedaant/.cloudflared/3bbc01c7-f1d1-41f7-adc9-646497a601b8.json
+
+ingress:
+  - hostname: policylens-api.vedaantagrawal.com
+    service: http://localhost:8000
+  - service: http_status:404
