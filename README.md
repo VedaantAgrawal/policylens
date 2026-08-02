@@ -9,6 +9,9 @@ regenerated from scratch by `make eval` (retrieval, free) and `make eval-generat
 (generation + judge, requires an Anthropic API key, ~$1-2 in API spend). Nothing here
 is hand-typed.
 
+**Live:** [interactive dashboard](https://policylens.vedaantagrawal.com) (static, Cloudflare Pages) ·
+[API](https://policylens-api.vedaantagrawal.com/health) (FastAPI behind a Cloudflare Tunnel to a local Docker container)
+
 ## Results
 
 ### Retrieval ablation (recall@k, MRR, nDCG@10 — 95% bootstrap CI, n=30 answerable questions)

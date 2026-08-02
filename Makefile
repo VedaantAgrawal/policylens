@@ -1,4 +1,4 @@
-.PHONY: setup ingest chunk embed test eval-s0 eval-s1 eval-s2 eval eval-generation eval-all ablation serve
+.PHONY: setup ingest chunk embed test eval-s0 eval-s1 eval-s2 eval eval-generation eval-all ablation serve dashboard dashboard-deploy
 
 # Fetches the corpus and builds every derived artifact from scratch.
 # data/raw/ and data/processed/ are gitignored on purpose (see .gitignore) —
@@ -48,3 +48,12 @@ ablation:
 
 serve:
 	uv run uvicorn policylens.serving.app:app --host 0.0.0.0 --port 8000
+
+# Renders site/index.html from eval_results/*.json — no hand-typed numbers.
+dashboard:
+	uv run python scripts/build_dashboard.py
+
+# Redeploys the static dashboard to Cloudflare Pages (policylens.vedaantagrawal.com).
+# Requires `npx wrangler login` once per machine.
+dashboard-deploy: dashboard
+	npx wrangler deploy

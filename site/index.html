@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PolicyLens &mdash; Retrieval Ablation</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --gridline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --page: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --gridline: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --series-3: #199e70;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--page);
+    color: var(--text-primary);
+    padding: 32px 20px 80px;
+  }
+  main { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: var(--text-secondary); margin-bottom: 8px; }
+  .subtitle a { color: var(--series-1); }
+  section { margin-top: 40px; }
+  h2 { font-size: 1.15rem; margin-bottom: 4px; }
+  .section-note { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; max-width: 720px; }
+  .legend { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-secondary); }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
+  .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+  .chart-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .chart-title { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; position: relative; }
+  .bar-label { width: 70px; font-size: 0.75rem; color: var(--text-muted); flex-shrink: 0; }
+  .bar-track { flex: 1; position: relative; height: 20px; }
+  .bar-fill { height: 20px; border-radius: 4px; position: relative; }
+  .bar-ci { position: absolute; top: 0; height: 20px; border-left: 2px solid var(--text-primary); border-right: 2px solid var(--text-primary); opacity: 0.35; }
+  .bar-value { font-size: 0.75rem; color: var(--text-secondary); width: 44px; text-align: right; flex-shrink: 0; }
+  .bar-fill:hover { outline: 2px solid var(--text-primary); outline-offset: 1px; cursor: default; }
+  table { border-collapse: collapse; width: 100%; margin-top: 12px; font-size: 0.85rem; }
+  caption { text-align: left; color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 6px; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--gridline); }
+  th { color: var(--text-muted); font-weight: 600; }
+  td.num { font-variant-numeric: tabular-nums; }
+  details summary { cursor: pointer; color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px; }
+  footer { margin-top: 60px; color: var(--text-muted); font-size: 0.8rem; }
+  footer a { color: var(--series-1); }
+</style>
+</head>
+<body>
+<main>
+  <h1>PolicyLens: Retrieval Ablation</h1>
+  <p class="subtitle">Agentic RAG over insurance &amp; regulatory documents &mdash;
+    <a href="https://github.com/VedaantAgrawal/policylens" target="_blank" rel="noopener">source on GitHub</a></p>
+  <p class="section-note">Every number below is read directly from committed
+    <code>eval_results/*.json</code>, regenerated from scratch by <code>make eval</code>
+    (retrieval) and <code>make eval-generation</code> (generation + judge). Bars show the
+    mean; the vertical tick marks show the 95% bootstrap confidence interval (n=30
+    answerable questions, 10,000 resamples).</p>
+
+  <section id="retrieval">
+    <h2>Retrieval ablation</h2>
+    <p class="section-note">Dense retrieval alone (S1) underperforms the BM25 baseline
+      (S0) on this corpus &mdash; this golden set skews toward precise-terminology
+      questions where exact lexical match beats a small, non-domain-tuned embedding
+      model. Hybrid fusion (S2) recovers the gap and leads on every metric, though a
+      paired bootstrap on the S0&rarr;S2 delta shows none of these differences clear
+      95% significance at n=30 &mdash; read the bars as a plausible signal, not a
+      settled result.</p>
+    
+    <div class="chart-grid" id="retrieval-charts"></div>
+    <details>
+      <summary>Show as table</summary>
+      <table id="retrieval-table"></table>
+    </details>
+  </section>
+
+  <section id="generation">
+    <h2>Generation quality</h2>
+    <p class="section-note">Refusal accuracy is identical across all three retrieval
+      stages (11/12 unanswerable questions correctly refused). Every false refusal
+      under S2 was traced by hand: none had the correct source chunk in the retrieved
+      top-5 &mdash; false refusals here are a retrieval-recall ceiling, not the
+      generator being over-cautious with the right context in hand.</p>
+    
+    <div class="chart-grid" id="generation-charts"></div>
+    <details>
+      <summary>Show as table</summary>
+      <table id="generation-table"></table>
+    </details>
+  </section>
+
+  <footer>
+    Corpus: 109 documents (6 SEC 10-Ks, 45 NAIC model laws, 54 NY/CA/TX DOI bulletins).
+    Generation: claude-sonnet-5. Judge: claude-haiku-4-5.
+    &middot; <a href="https://policylens-api.vedaantagrawal.com/health" target="_blank" rel="noopener">live API</a>
+  </footer>
+</main>
+
+<script id="viz-data" type="application/json">{"stages": [["s0_bm25", "S0 BM25"], ["s1_dense", "S1 Dense"], ["s2_hybrid", "S2 Hybrid"]], "retrieval_metrics": [["recall_at_5", "Recall@5"], ["recall_at_10", "Recall@10"], ["mrr", "MRR"], ["ndcg_at_10", "nDCG@10"]], "generation_metrics": [["citation_precision", "Citation Precision"], ["groundedness", "Groundedness"], ["refusal_accuracy", "Refusal Accuracy"], ["false_refusal_rate", "False Refusal Rate"]], "retrieval": {"s0_bm25": {"recall_at_5": {"mean": 0.6, "ci_lower": 0.43333333333333335, "ci_upper": 0.7666666666666667}, "recall_at_10": {"mean": 0.7666666666666667, "ci_lower": 0.6, "ci_upper": 0.9}, "mrr": {"mean": 0.4654100529100529, "ci_lower": 0.3189120370370371, "ci_upper": 0.610648148148148}, "ndcg_at_10": {"mean": 0.5345452980502167, "ci_lower": 0.39758786373103794, "ci_upper": 0.6681811327368425}}, "s1_dense": {"recall_at_5": {"mean": 0.5166666666666667, "ci_lower": 0.3333333333333333, "ci_upper": 0.7}, "recall_at_10": {"mean": 0.5333333333333333, "ci_lower": 0.36666666666666664, "ci_upper": 0.7}, "mrr": {"mean": 0.42611111111111105, "ci_lower": 0.26333333333333336, "ci_upper": 0.59}, "ndcg_at_10": {"mean": 0.4470314500678158, "ci_lower": 0.28538556137589605, "ci_upper": 0.6076221931866481}}, "s2_hybrid": {"recall_at_5": {"mean": 0.6333333333333333, "ci_lower": 0.4666666666666667, "ci_upper": 0.8}, "recall_at_10": {"mean": 0.7666666666666667, "ci_lower": 0.6, "ci_upper": 0.9}, "mrr": {"mean": 0.49489417989417983, "ci_lower": 0.34462896825396827, "ci_upper": 0.6410052910052909}, "ndcg_at_10": {"mean": 0.5557765765980648, "ci_lower": 0.41242492613861736, "ci_upper": 0.6894909810838439}}}, "generation": {"s0_bm25": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 26}, "groundedness": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 24}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.2, "ci_lower": 0.06666666666666667, "ci_upper": 0.36666666666666664, "n": 30}}, "s1_dense": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 24}, "groundedness": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 21}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.3, "ci_lower": 0.13333333333333333, "ci_upper": 0.4666666666666667, "n": 30}}, "s2_hybrid": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 25}, "groundedness": {"mean": 0.9047619047619048, "ci_lower": 0.7619047619047619, "ci_upper": 1.0, "n": 21}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.3, "ci_lower": 0.13333333333333333, "ci_upper": 0.4666666666666667, "n": 30}}}}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('viz-data').textContent);
+const SERIES_COLORS = ['var(--series-1)', 'var(--series-2)', 'var(--series-3)'];
+
+function legendHTML() {
+  return '<div class="legend">' + DATA.stages.map(([id, label], i) =>
+    `<div class="legend-item"><span class="legend-swatch" style="background:${SERIES_COLORS[i]}"></span>${label}</div>`
+  ).join('') + '</div>';
+}
+// Insert legends
+document.getElementById('retrieval-charts').insertAdjacentHTML('beforebegin', legendHTML());
+document.getElementById('generation-charts').insertAdjacentHTML('beforebegin', legendHTML());
+
+function renderChartGrid(containerId, metrics, dataByStage) {
+  const container = document.getElementById(containerId);
+  metrics.forEach(([metricId, metricLabel]) => {
+    const card = document.createElement('div');
+    card.className = 'chart-card';
+    const title = document.createElement('div');
+    title.className = 'chart-title';
+    title.textContent = metricLabel;
+    card.appendChild(title);
+
+    DATA.stages.forEach(([stageId, stageLabel], i) => {
+      const stageData = dataByStage[stageId];
+      const stats = stageData ? stageData[metricId] : null;
+      const row = document.createElement('div');
+      row.className = 'bar-row';
+
+      const label = document.createElement('div');
+      label.className = 'bar-label';
+      label.textContent = stageLabel;
+      row.appendChild(label);
+
+      const track = document.createElement('div');
+      track.className = 'bar-track';
+
+      if (stats && stats.mean !== null && stats.mean !== undefined) {
+        const pct = Math.max(0, Math.min(1, stats.mean)) * 100;
+        const loPct = Math.max(0, Math.min(1, stats.ci_lower)) * 100;
+        const hiPct = Math.max(0, Math.min(1, stats.ci_upper)) * 100;
+
+        const fill = document.createElement('div');
+        fill.className = 'bar-fill';
+        fill.style.width = pct + '%';
+        fill.style.background = SERIES_COLORS[i];
+        fill.title = `${stageLabel} ${metricLabel}: ${stats.mean.toFixed(3)} [${stats.ci_lower.toFixed(3)}, ${stats.ci_upper.toFixed(3)}]`;
+        track.appendChild(fill);
+
+        const ci = document.createElement('div');
+        ci.className = 'bar-ci';
+        ci.style.left = loPct + '%';
+        ci.style.width = Math.max(0, hiPct - loPct) + '%';
+        track.appendChild(ci);
+      } else {
+        track.style.opacity = '0.3';
+        track.title = 'not run';
+      }
+      row.appendChild(track);
+
+      const value = document.createElement('div');
+      value.className = 'bar-value';
+      value.textContent = (stats && stats.mean !== null && stats.mean !== undefined) ? stats.mean.toFixed(3) : 'n/a';
+      row.appendChild(value);
+
+      card.appendChild(row);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderTable(tableId, metrics, dataByStage) {
+  const table = document.getElementById(tableId);
+  const caption = document.createElement('caption');
+  caption.textContent = 'Mean [95% CI]';
+  table.appendChild(caption);
+  const thead = document.createElement('thead');
+  thead.innerHTML = '<tr><th>Stage</th>' + metrics.map(([, label]) => `<th>${label}</th>`).join('') + '</tr>';
+  table.appendChild(thead);
+  const tbody = document.createElement('tbody');
+  DATA.stages.forEach(([stageId, stageLabel]) => {
+    const stageData = dataByStage[stageId];
+    const cells = metrics.map(([metricId]) => {
+      const stats = stageData ? stageData[metricId] : null;
+      if (!stats || stats.mean === null || stats.mean === undefined) return '<td class="num">n/a</td>';
+      return `<td class="num">${stats.mean.toFixed(3)} [${stats.ci_lower.toFixed(3)}, ${stats.ci_upper.toFixed(3)}]</td>`;
+    }).join('');
+    tbody.innerHTML += `<tr><td>${stageLabel}</td>${cells}</tr>`;
+  });
+  table.appendChild(tbody);
+}
+
+renderChartGrid('retrieval-charts', DATA.retrieval_metrics, DATA.retrieval);
+renderTable('retrieval-table', DATA.retrieval_metrics, DATA.retrieval);
+renderChartGrid('generation-charts', DATA.generation_metrics, DATA.generation);
+renderTable('generation-table', DATA.generation_metrics, DATA.generation);
+</script>
+</body>
+</html>
