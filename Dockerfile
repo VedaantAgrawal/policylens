@@ -5,10 +5,8 @@ RUN pip install --no-cache-dir uv
 
 WORKDIR /app
 
-COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
-
 COPY . .
+RUN uv sync --frozen --no-dev
 
 # Corpus, chunks, and embeddings are gitignored (regenerable, see .gitignore) —
 # build them into the image so the container doesn't need external network
