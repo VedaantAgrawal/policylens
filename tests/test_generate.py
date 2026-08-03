@@ -3,6 +3,7 @@ import json
 import pytest
 
 from policylens.generation.generate import GenerationResult, generate_answer
+from policylens.providers.base import CompletionResult
 
 
 class FakeProvider:
@@ -13,10 +14,10 @@ class FakeProvider:
         self.last_system = None
         self.last_user_message = None
 
-    def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> str:
+    def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> CompletionResult:
         self.last_system = system
         self.last_user_message = user_message
-        return self._response
+        return CompletionResult(text=self._response, input_tokens=100, output_tokens=50, latency_seconds=0.5)
 
 
 CHUNKS = [
@@ -57,6 +58,15 @@ def test_refusal_response_parsed_correctly():
     result = generate_answer(provider, "q", CHUNKS)
     assert result.answerable is False
     assert result.citations == []
+
+
+def test_usage_and_latency_propagated_from_provider():
+    response = json.dumps({"answerable": True, "answer": "a", "citations": []})
+    provider = FakeProvider(response)
+    result = generate_answer(provider, "q", CHUNKS)
+    assert result.input_tokens == 100
+    assert result.output_tokens == 50
+    assert result.latency_seconds == pytest.approx(0.5)
 
 
 def test_retrieved_chunks_wrapped_as_source_tags_not_instructions():

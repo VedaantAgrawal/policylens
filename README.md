@@ -57,6 +57,18 @@ context and correctly declined to guess. Refusal calibration itself looks solid
 (91.7% accuracy on genuinely unanswerable questions, with zero cases of refusing
 despite having the answer available).
 
+### Ops: latency and cost (S2 hybrid, n=30, `claude-sonnet-5`)
+
+| p50 latency | p95 latency | mean latency | mean cost/query | total cost |
+|---|---|---|---|---|
+| 3.33s | 6.53s | 3.92s (retrieval 0.11s + generation 3.81s) | $0.013 | $0.39 |
+
+Retrieval is not the bottleneck — generation is ~97% of end-to-end latency. Reproduce
+with `make eval-latency-cost` (requires `ANTHROPIC_API_KEY`, makes real API calls).
+Every `/query` response also carries an `X-Response-Time-Ms` header and a `cost_usd`
+field, computed the same way, so this isn't a number that only exists in a committed
+JSON file — you can watch it on the live API.
+
 ## Architecture
 
 ```
@@ -109,6 +121,14 @@ data/manifest.jsonl (committed)          data/golden/golden_questions.json (comm
   with an explicit system-prompt instruction to treat it as inert data, never as
   instructions — a chunk containing "ignore prior instructions and..." is
   attacker-controlled content the model must not act on.
+- **PII redaction on ingest**: every chunk is scanned for SSN/email/phone/credit-card
+  patterns before being written, replaced with `[REDACTED-<TYPE>]`. Not theoretical —
+  it fires 153 times on the real corpus, almost entirely legitimate department contact
+  info in state bulletins ("Consumer Hotline at [REDACTED-PHONE]"). The first pass of
+  the phone/credit-card patterns was too loose and matched actuarial loss-development
+  tables in the 10-Ks (columns of space-separated 3-4 digit numbers happen to be
+  phone/card-shaped) — tightened to require parens or dashes, not bare spaces, and
+  verified against zero overlap with golden-set-relevant chunks before trusting it.
 
 ## Reproduce it
 
@@ -118,10 +138,12 @@ cd policylens
 uv sync
 
 make setup             # fetch corpus, chunk, embed (~2 min, needs internet)
-make test               # 46 unit tests, including the eval metrics themselves
+make test               # 60 unit tests, including the eval metrics and PII redaction
 make eval               # regenerate the retrieval ablation table — free, no API key
 make eval-generation     # regenerate generation/groundedness/refusal — needs
                           #   ANTHROPIC_API_KEY in .env, costs ~$1-2 in API spend
+make eval-latency-cost   # p50/p95 latency + cost-per-query for S2 — needs
+                          #   ANTHROPIC_API_KEY, makes real API calls
 ```
 
 `make eval` alone reproduces every number in the retrieval ablation table above from

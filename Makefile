@@ -1,4 +1,4 @@
-.PHONY: setup ingest chunk embed test eval-s0 eval-s1 eval-s2 eval eval-generation eval-all ablation serve dashboard dashboard-deploy
+.PHONY: setup ingest chunk embed test eval-s0 eval-s1 eval-s2 eval eval-generation eval-all ablation serve dashboard dashboard-deploy eval-latency-cost
 
 # Fetches the corpus and builds every derived artifact from scratch.
 # data/raw/ and data/processed/ are gitignored on purpose (see .gitignore) —
@@ -42,6 +42,11 @@ eval-generation:
 	uv run python -m policylens.eval.ablation
 
 eval-all: eval eval-generation
+
+# p50/p95 latency + cost-per-query for the recommended production stage
+# (S2 hybrid). Requires ANTHROPIC_API_KEY, makes real API calls.
+eval-latency-cost:
+	uv run python -m policylens.eval.run_latency_cost s2_hybrid
 
 ablation:
 	uv run python -m policylens.eval.ablation

@@ -8,7 +8,11 @@ actual AWS account.
 
 from __future__ import annotations
 
+import time
+
 from anthropic import AnthropicBedrockMantle
+
+from policylens.providers.base import CompletionResult
 
 DEFAULT_MODEL = "anthropic.claude-sonnet-5"
 
@@ -20,11 +24,19 @@ class BedrockProvider:
         self._client = AnthropicBedrockMantle(aws_region=aws_region)
         self._model = model
 
-    def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> str:
+    def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> CompletionResult:
+        start = time.monotonic()
         response = self._client.messages.create(
             model=self._model,
             max_tokens=max_tokens,
             system=system,
             messages=[{"role": "user", "content": user_message}],
         )
-        return next(block.text for block in response.content if block.type == "text")
+        latency_seconds = time.monotonic() - start
+        text = next(block.text for block in response.content if block.type == "text")
+        return CompletionResult(
+            text=text,
+            input_tokens=response.usage.input_tokens,
+            output_tokens=response.usage.output_tokens,
+            latency_seconds=latency_seconds,
+        )

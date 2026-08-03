@@ -44,6 +44,9 @@ class GroundednessVerdict:
     grounded: bool
     reasoning: str
     parse_error: bool = False
+    input_tokens: int = 0
+    output_tokens: int = 0
+    latency_seconds: float = 0.0
 
 
 def _build_user_message(question: str, answer: str, cited_chunks: list[dict]) -> str:
@@ -60,11 +63,20 @@ def judge_groundedness(
 ) -> GroundednessVerdict:
     cited_chunks = [chunks_by_id[cid] for cid in result.citations if cid in chunks_by_id]
     user_message = _build_user_message(question, result.answer, cited_chunks)
-    raw = provider.complete(system=JUDGE_SYSTEM_PROMPT, user_message=user_message, max_tokens=300)
+    completion = provider.complete(system=JUDGE_SYSTEM_PROMPT, user_message=user_message, max_tokens=300)
+    usage = {
+        "input_tokens": completion.input_tokens,
+        "output_tokens": completion.output_tokens,
+        "latency_seconds": completion.latency_seconds,
+    }
 
     try:
-        cleaned = _FENCE_RE.sub("", raw.strip())
+        cleaned = _FENCE_RE.sub("", completion.text.strip())
         parsed = json.loads(cleaned)
-        return GroundednessVerdict(grounded=bool(parsed["grounded"]), reasoning=str(parsed["reasoning"]))
+        return GroundednessVerdict(
+            grounded=bool(parsed["grounded"]), reasoning=str(parsed["reasoning"]), **usage
+        )
     except (json.JSONDecodeError, KeyError, TypeError):
-        return GroundednessVerdict(grounded=False, reasoning=f"[judge parse error] {raw[:300]}", parse_error=True)
+        return GroundednessVerdict(
+            grounded=False, reasoning=f"[judge parse error] {completion.text[:300]}", parse_error=True, **usage
+        )

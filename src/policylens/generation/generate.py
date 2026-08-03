@@ -53,6 +53,9 @@ class GenerationResult:
     citations: list[str]
     retrieved_chunk_ids: list[str]
     parse_error: bool = False
+    input_tokens: int = 0
+    output_tokens: int = 0
+    latency_seconds: float = 0.0
 
     @property
     def citation_precision(self) -> float | None:
@@ -85,23 +88,30 @@ def _parse_response(raw: str) -> dict:
 def generate_answer(provider: "ModelProvider", question: str, chunks: list[dict]) -> GenerationResult:
     user_message = _build_user_message(question, chunks)
     retrieved_chunk_ids = [c["chunk_id"] for c in chunks]
-    raw = provider.complete(system=SYSTEM_PROMPT, user_message=user_message, max_tokens=1024)
+    completion = provider.complete(system=SYSTEM_PROMPT, user_message=user_message, max_tokens=1024)
+    usage = {
+        "input_tokens": completion.input_tokens,
+        "output_tokens": completion.output_tokens,
+        "latency_seconds": completion.latency_seconds,
+    }
 
     try:
-        parsed = _parse_response(raw)
+        parsed = _parse_response(completion.text)
         return GenerationResult(
             question=question,
             answerable=bool(parsed["answerable"]),
             answer=str(parsed["answer"]),
             citations=list(parsed.get("citations", [])),
             retrieved_chunk_ids=retrieved_chunk_ids,
+            **usage,
         )
     except (json.JSONDecodeError, KeyError, TypeError):
         return GenerationResult(
             question=question,
             answerable=False,
-            answer=f"[generation parse error] {raw[:500]}",
+            answer=f"[generation parse error] {completion.text[:500]}",
             citations=[],
             retrieved_chunk_ids=retrieved_chunk_ids,
             parse_error=True,
+            **usage,
         )

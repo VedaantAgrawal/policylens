@@ -2,6 +2,7 @@ import json
 
 from policylens.eval.judge import judge_groundedness
 from policylens.generation.generate import GenerationResult
+from policylens.providers.base import CompletionResult
 
 
 class FakeProvider:
@@ -10,8 +11,8 @@ class FakeProvider:
     def __init__(self, response: str):
         self._response = response
 
-    def complete(self, *, system: str, user_message: str, max_tokens: int = 300) -> str:
-        return self._response
+    def complete(self, *, system: str, user_message: str, max_tokens: int = 300) -> CompletionResult:
+        return CompletionResult(text=self._response, input_tokens=80, output_tokens=20, latency_seconds=0.2)
 
 
 CHUNKS_BY_ID = {"naic_808_1": {"chunk_id": "naic_808_1", "text": "60 days after default."}}

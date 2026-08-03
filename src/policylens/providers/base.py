@@ -7,12 +7,28 @@ business logic run against Anthropic or Bedrock without touching call sites.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Protocol
+
+
+@dataclass
+class CompletionResult:
+    """Provider response, plus what it costs and how long it took to get it.
+
+    Token counts and latency are carried on every response, not just fetched
+    on demand, so callers (generation, judge, the /query endpoint) can report
+    cost-per-query and p50/p95 latency without a second measurement path.
+    """
+
+    text: str
+    input_tokens: int
+    output_tokens: int
+    latency_seconds: float
 
 
 class ModelProvider(Protocol):
     name: str
 
-    def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> str:
-        """Return the model's text response to a single-turn request."""
+    def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> CompletionResult:
+        """Return the model's response to a single-turn request, with usage + timing."""
         ...

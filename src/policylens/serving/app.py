@@ -8,14 +8,16 @@ otherwise tax every single query.
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from policylens.eval.pricing import estimate_cost_usd
 from policylens.generation.generate import generate_answer
-from policylens.providers.anthropic_provider import AnthropicProvider
+from policylens.providers.anthropic_provider import AnthropicProvider, DEFAULT_MODEL
 from policylens.retrieval.hybrid import HybridRetriever
 
 app = FastAPI(title="PolicyLens API", description="Agentic RAG over insurance and regulatory documents")
@@ -26,6 +28,17 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def add_response_time_header(request: Request, call_next):
+    """Surfaces per-request latency for live demo purposes — same wall-clock
+    metric `make eval-latency-cost` reports p50/p95 over, just visible on
+    every single response instead of only in a committed eval run."""
+    start = time.monotonic()
+    response = await call_next(request)
+    response.headers["X-Response-Time-Ms"] = f"{(time.monotonic() - start) * 1000:.1f}"
+    return response
 
 CHUNKS_PATH = Path("data/processed/chunks.jsonl")
 EVAL_RESULTS_DIR = Path("eval_results")
@@ -57,6 +70,7 @@ class QueryResponse(BaseModel):
     answer: str
     citations: list[Citation]
     retrieved_chunk_ids: list[str]
+    cost_usd: float
 
 
 @app.get("/health")
@@ -81,11 +95,14 @@ def query(request: QueryRequest) -> QueryResponse:
         if cid in _chunks_by_id
     ]
 
+    cost_usd = estimate_cost_usd(DEFAULT_MODEL, result.input_tokens, result.output_tokens)
+
     return QueryResponse(
         answerable=result.answerable,
         answer=result.answer,
         citations=citations,
         retrieved_chunk_ids=retrieved_ids,
+        cost_usd=cost_usd,
     )
 
 
