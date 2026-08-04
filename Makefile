@@ -26,9 +26,13 @@ eval-s1:
 eval-s2:
 	uv run python -m policylens.eval.run_stage s2_hybrid
 
+eval-s3:
+	uv run python -m policylens.eval.run_stage s3_rerank
+
 # Retrieval-only ablation table (recall@k / MRR / nDCG@10). Free — no API
-# key needed, everything runs locally (BM25 + local sentence-transformers).
-eval: eval-s0 eval-s1 eval-s2
+# key needed, everything runs locally (BM25 + local sentence-transformers +
+# local cross-encoder rerank).
+eval: eval-s0 eval-s1 eval-s2 eval-s3
 	uv run python -m policylens.eval.ablation
 
 # Generation + groundedness + refusal accuracy. Requires ANTHROPIC_API_KEY
@@ -39,6 +43,7 @@ eval-generation:
 	uv run python -m policylens.eval.run_generation_stage s0_bm25
 	uv run python -m policylens.eval.run_generation_stage s1_dense
 	uv run python -m policylens.eval.run_generation_stage s2_hybrid
+	uv run python -m policylens.eval.run_generation_stage s3_rerank
 	uv run python -m policylens.eval.ablation
 
 eval-all: eval eval-generation

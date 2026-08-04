@@ -12,7 +12,7 @@ from pathlib import Path
 
 EVAL_RESULTS_DIR = Path("eval_results")
 
-RETRIEVAL_STAGES = ["s0_bm25", "s1_dense", "s2_hybrid"]
+RETRIEVAL_STAGES = ["s0_bm25", "s1_dense", "s2_hybrid", "s3_rerank"]
 RETRIEVAL_METRICS = ["recall_at_5", "recall_at_10", "mrr", "ndcg_at_10"]
 GENERATION_METRICS = ["citation_precision", "groundedness", "refusal_accuracy", "false_refusal_rate"]
 

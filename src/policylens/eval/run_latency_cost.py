@@ -25,6 +25,7 @@ from policylens.providers.anthropic_provider import AnthropicProvider, DEFAULT_M
 from policylens.retrieval.bm25 import Bm25Retriever
 from policylens.retrieval.dense import DenseRetriever
 from policylens.retrieval.hybrid import HybridRetriever
+from policylens.retrieval.rerank import CrossEncoderRerankRetriever
 
 EVAL_RESULTS_DIR = Path("eval_results")
 CHUNKS_PATH = Path("data/processed/chunks.jsonl")
@@ -34,6 +35,7 @@ _RETRIEVER_FACTORIES = {
     "s0_bm25": Bm25Retriever,
     "s1_dense": DenseRetriever,
     "s2_hybrid": HybridRetriever,
+    "s3_rerank": CrossEncoderRerankRetriever,
 }
 
 

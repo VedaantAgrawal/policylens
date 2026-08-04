@@ -18,6 +18,7 @@
     --series-1: #2a78d6;
     --series-2: #eb6834;
     --series-3: #1baf7a;
+    --series-4: #eda100;
   }
   @media (prefers-color-scheme: dark) {
     :root:where(:not([data-theme="light"])) {
@@ -33,6 +34,7 @@
       --series-1: #3987e5;
       --series-2: #d95926;
       --series-3: #199e70;
+      --series-4: #c98500;
     }
   }
   :root[data-theme="dark"] {
@@ -48,6 +50,7 @@
     --series-1: #3987e5;
     --series-2: #d95926;
     --series-3: #199e70;
+    --series-4: #c98500;
   }
   * { box-sizing: border-box; }
   body {
@@ -108,8 +111,10 @@
     <p class="section-note">Dense retrieval alone (S1) underperforms the BM25 baseline
       (S0) on this corpus &mdash; this golden set skews toward precise-terminology
       questions where exact lexical match beats a small, non-domain-tuned embedding
-      model. Hybrid fusion (S2) recovers the gap and leads on every metric, though a
-      paired bootstrap on the S0&rarr;S2 delta shows none of these differences clear
+      model. Hybrid fusion (S2) recovers the gap; cross-encoder rerank (S3) leads on
+      3 of 4 metrics but its recall@10 actually drops below S2's, since reranking can
+      only reorder S2's fixed top-20 candidate pool, not recover chunks outside it.
+      A paired bootstrap on the S0&rarr;S2 delta shows none of these differences clear
       95% significance at n=30 &mdash; read the bars as a plausible signal, not a
       settled result.</p>
     
@@ -122,7 +127,7 @@
 
   <section id="generation">
     <h2>Generation quality</h2>
-    <p class="section-note">Refusal accuracy is identical across all three retrieval
+    <p class="section-note">Refusal accuracy is identical across all four retrieval
       stages (11/12 unanswerable questions correctly refused). Every false refusal
       under S2 was traced by hand: none had the correct source chunk in the retrieved
       top-5 &mdash; false refusals here are a retrieval-recall ceiling, not the
@@ -142,10 +147,10 @@
   </footer>
 </main>
 
-<script id="viz-data" type="application/json">{"stages": [["s0_bm25", "S0 BM25"], ["s1_dense", "S1 Dense"], ["s2_hybrid", "S2 Hybrid"]], "retrieval_metrics": [["recall_at_5", "Recall@5"], ["recall_at_10", "Recall@10"], ["mrr", "MRR"], ["ndcg_at_10", "nDCG@10"]], "generation_metrics": [["citation_precision", "Citation Precision"], ["groundedness", "Groundedness"], ["refusal_accuracy", "Refusal Accuracy"], ["false_refusal_rate", "False Refusal Rate"]], "retrieval": {"s0_bm25": {"recall_at_5": {"mean": 0.6, "ci_lower": 0.43333333333333335, "ci_upper": 0.7666666666666667}, "recall_at_10": {"mean": 0.7666666666666667, "ci_lower": 0.6, "ci_upper": 0.9}, "mrr": {"mean": 0.4654100529100529, "ci_lower": 0.3189120370370371, "ci_upper": 0.610648148148148}, "ndcg_at_10": {"mean": 0.5345452980502167, "ci_lower": 0.39758786373103794, "ci_upper": 0.6681811327368425}}, "s1_dense": {"recall_at_5": {"mean": 0.5166666666666667, "ci_lower": 0.3333333333333333, "ci_upper": 0.7}, "recall_at_10": {"mean": 0.5333333333333333, "ci_lower": 0.36666666666666664, "ci_upper": 0.7}, "mrr": {"mean": 0.42611111111111105, "ci_lower": 0.26333333333333336, "ci_upper": 0.59}, "ndcg_at_10": {"mean": 0.4470314500678158, "ci_lower": 0.28538556137589605, "ci_upper": 0.6076221931866481}}, "s2_hybrid": {"recall_at_5": {"mean": 0.6333333333333333, "ci_lower": 0.4666666666666667, "ci_upper": 0.8}, "recall_at_10": {"mean": 0.7666666666666667, "ci_lower": 0.6, "ci_upper": 0.9}, "mrr": {"mean": 0.49489417989417983, "ci_lower": 0.34462896825396827, "ci_upper": 0.6410052910052909}, "ndcg_at_10": {"mean": 0.5557765765980648, "ci_lower": 0.41242492613861736, "ci_upper": 0.6894909810838439}}}, "generation": {"s0_bm25": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 26}, "groundedness": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 24}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.2, "ci_lower": 0.06666666666666667, "ci_upper": 0.36666666666666664, "n": 30}}, "s1_dense": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 24}, "groundedness": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 21}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.3, "ci_lower": 0.13333333333333333, "ci_upper": 0.4666666666666667, "n": 30}}, "s2_hybrid": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 25}, "groundedness": {"mean": 0.9047619047619048, "ci_lower": 0.7619047619047619, "ci_upper": 1.0, "n": 21}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.3, "ci_lower": 0.13333333333333333, "ci_upper": 0.4666666666666667, "n": 30}}}}</script>
+<script id="viz-data" type="application/json">{"stages": [["s0_bm25", "S0 BM25"], ["s1_dense", "S1 Dense"], ["s2_hybrid", "S2 Hybrid"], ["s3_rerank", "S3 Rerank"]], "retrieval_metrics": [["recall_at_5", "Recall@5"], ["recall_at_10", "Recall@10"], ["mrr", "MRR"], ["ndcg_at_10", "nDCG@10"]], "generation_metrics": [["citation_precision", "Citation Precision"], ["groundedness", "Groundedness"], ["refusal_accuracy", "Refusal Accuracy"], ["false_refusal_rate", "False Refusal Rate"]], "retrieval": {"s0_bm25": {"recall_at_5": {"mean": 0.6, "ci_lower": 0.43333333333333335, "ci_upper": 0.7666666666666667}, "recall_at_10": {"mean": 0.7666666666666667, "ci_lower": 0.6, "ci_upper": 0.9}, "mrr": {"mean": 0.4654100529100529, "ci_lower": 0.3189120370370371, "ci_upper": 0.610648148148148}, "ndcg_at_10": {"mean": 0.5345452980502167, "ci_lower": 0.39758786373103794, "ci_upper": 0.6681811327368425}}, "s1_dense": {"recall_at_5": {"mean": 0.5333333333333333, "ci_lower": 0.36666666666666664, "ci_upper": 0.7}, "recall_at_10": {"mean": 0.5333333333333333, "ci_lower": 0.36666666666666664, "ci_upper": 0.7}, "mrr": {"mean": 0.42611111111111105, "ci_lower": 0.26333333333333336, "ci_upper": 0.59}, "ndcg_at_10": {"mean": 0.44855347292629666, "ci_lower": 0.28744042077632337, "ci_upper": 0.6095444008148703}}, "s2_hybrid": {"recall_at_5": {"mean": 0.6333333333333333, "ci_lower": 0.4666666666666667, "ci_upper": 0.8}, "recall_at_10": {"mean": 0.7666666666666667, "ci_lower": 0.6, "ci_upper": 0.9}, "mrr": {"mean": 0.49489417989417983, "ci_lower": 0.34462896825396827, "ci_upper": 0.6410052910052909}, "ndcg_at_10": {"mean": 0.5571934257250694, "ci_lower": 0.4135605056813628, "ci_upper": 0.6920104278949356}}, "s3_rerank": {"recall_at_5": {"mean": 0.6666666666666666, "ci_lower": 0.5, "ci_upper": 0.8333333333333334}, "recall_at_10": {"mean": 0.7, "ci_lower": 0.5333333333333333, "ci_upper": 0.8666666666666667}, "mrr": {"mean": 0.5444444444444445, "ci_lower": 0.3888888888888889, "ci_upper": 0.6944444444444444}, "ndcg_at_10": {"mean": 0.5810192248037833, "ci_lower": 0.4257571820702742, "ci_upper": 0.7253368850259418}}}, "generation": {"s0_bm25": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 26}, "groundedness": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 24}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.2, "ci_lower": 0.06666666666666667, "ci_upper": 0.36666666666666664, "n": 30}}, "s1_dense": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 24}, "groundedness": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 21}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.3, "ci_lower": 0.13333333333333333, "ci_upper": 0.4666666666666667, "n": 30}}, "s2_hybrid": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 25}, "groundedness": {"mean": 0.9047619047619048, "ci_lower": 0.7619047619047619, "ci_upper": 1.0, "n": 21}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.3, "ci_lower": 0.13333333333333333, "ci_upper": 0.4666666666666667, "n": 30}}, "s3_rerank": {"citation_precision": {"mean": 1.0, "ci_lower": 1.0, "ci_upper": 1.0, "n": 25}, "groundedness": {"mean": 0.9565217391304348, "ci_lower": 0.8695652173913043, "ci_upper": 1.0, "n": 23}, "refusal_accuracy": {"mean": 0.9166666666666666, "ci_lower": 0.75, "ci_upper": 1.0, "n": 12}, "false_refusal_rate": {"mean": 0.23333333333333334, "ci_lower": 0.1, "ci_upper": 0.4, "n": 30}}}}</script>
 <script>
 const DATA = JSON.parse(document.getElementById('viz-data').textContent);
-const SERIES_COLORS = ['var(--series-1)', 'var(--series-2)', 'var(--series-3)'];
+const SERIES_COLORS = ['var(--series-1)', 'var(--series-2)', 'var(--series-3)', 'var(--series-4)'];
 
 function legendHTML() {
   return '<div class="legend">' + DATA.stages.map(([id, label], i) =>

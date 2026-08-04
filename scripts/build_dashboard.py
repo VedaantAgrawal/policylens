@@ -15,6 +15,7 @@ STAGES = [
     ("s0_bm25", "S0 BM25"),
     ("s1_dense", "S1 Dense"),
     ("s2_hybrid", "S2 Hybrid"),
+    ("s3_rerank", "S3 Rerank"),
 ]
 RETRIEVAL_METRICS = [
     ("recall_at_5", "Recall@5"),
@@ -74,6 +75,7 @@ TEMPLATE = """<!doctype html>
     --series-1: #2a78d6;
     --series-2: #eb6834;
     --series-3: #1baf7a;
+    --series-4: #eda100;
   }
   @media (prefers-color-scheme: dark) {
     :root:where(:not([data-theme="light"])) {
@@ -89,6 +91,7 @@ TEMPLATE = """<!doctype html>
       --series-1: #3987e5;
       --series-2: #d95926;
       --series-3: #199e70;
+      --series-4: #c98500;
     }
   }
   :root[data-theme="dark"] {
@@ -104,6 +107,7 @@ TEMPLATE = """<!doctype html>
     --series-1: #3987e5;
     --series-2: #d95926;
     --series-3: #199e70;
+    --series-4: #c98500;
   }
   * { box-sizing: border-box; }
   body {
@@ -164,8 +168,10 @@ TEMPLATE = """<!doctype html>
     <p class="section-note">Dense retrieval alone (S1) underperforms the BM25 baseline
       (S0) on this corpus &mdash; this golden set skews toward precise-terminology
       questions where exact lexical match beats a small, non-domain-tuned embedding
-      model. Hybrid fusion (S2) recovers the gap and leads on every metric, though a
-      paired bootstrap on the S0&rarr;S2 delta shows none of these differences clear
+      model. Hybrid fusion (S2) recovers the gap; cross-encoder rerank (S3) leads on
+      3 of 4 metrics but its recall@10 actually drops below S2's, since reranking can
+      only reorder S2's fixed top-20 candidate pool, not recover chunks outside it.
+      A paired bootstrap on the S0&rarr;S2 delta shows none of these differences clear
       95% significance at n=30 &mdash; read the bars as a plausible signal, not a
       settled result.</p>
     __LEGEND__
@@ -178,7 +184,7 @@ TEMPLATE = """<!doctype html>
 
   <section id="generation">
     <h2>Generation quality</h2>
-    <p class="section-note">Refusal accuracy is identical across all three retrieval
+    <p class="section-note">Refusal accuracy is identical across all four retrieval
       stages (11/12 unanswerable questions correctly refused). Every false refusal
       under S2 was traced by hand: none had the correct source chunk in the retrieved
       top-5 &mdash; false refusals here are a retrieval-recall ceiling, not the
@@ -201,7 +207,7 @@ TEMPLATE = """<!doctype html>
 <script id="viz-data" type="application/json">__DATA__</script>
 <script>
 const DATA = JSON.parse(document.getElementById('viz-data').textContent);
-const SERIES_COLORS = ['var(--series-1)', 'var(--series-2)', 'var(--series-3)'];
+const SERIES_COLORS = ['var(--series-1)', 'var(--series-2)', 'var(--series-3)', 'var(--series-4)'];
 
 function legendHTML() {
   return '<div class="legend">' + DATA.stages.map(([id, label], i) =>

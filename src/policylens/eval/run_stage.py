@@ -21,13 +21,15 @@ def _register_stages():
     from policylens.retrieval.bm25 import Bm25Retriever
     from policylens.retrieval.dense import DenseRetriever
     from policylens.retrieval.hybrid import HybridRetriever
+    from policylens.retrieval.rerank import CrossEncoderRerankRetriever
 
     _STAGE_FACTORIES["s0_bm25"] = Bm25Retriever
     _STAGE_FACTORIES["s1_dense"] = DenseRetriever
     _STAGE_FACTORIES["s2_hybrid"] = HybridRetriever
+    _STAGE_FACTORIES["s3_rerank"] = CrossEncoderRerankRetriever
 
 
-AVAILABLE_STAGES = ("s0_bm25", "s1_dense", "s2_hybrid")
+AVAILABLE_STAGES = ("s0_bm25", "s1_dense", "s2_hybrid", "s3_rerank")
 
 
 def main() -> None:

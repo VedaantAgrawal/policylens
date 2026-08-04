@@ -19,8 +19,9 @@ is hand-typed.
 | Stage | recall@5 | recall@10 | MRR | nDCG@10 |
 |---|---|---|---|---|
 | **S0** BM25 (baseline) | 0.600 [0.433, 0.767] | 0.767 [0.600, 0.900] | 0.465 [0.319, 0.611] | 0.535 [0.398, 0.668] |
-| **S1** dense (all-MiniLM-L6-v2) | 0.517 [0.333, 0.700] | 0.533 [0.367, 0.700] | 0.426 [0.263, 0.590] | 0.447 [0.285, 0.608] |
-| **S2** hybrid (RRF, S0+S1) | 0.633 [0.467, 0.800] | 0.767 [0.600, 0.900] | 0.495 [0.345, 0.641] | 0.556 [0.412, 0.689] |
+| **S1** dense (all-MiniLM-L6-v2) | 0.533 [0.367, 0.700] | 0.533 [0.367, 0.700] | 0.426 [0.263, 0.590] | 0.449 [0.287, 0.610] |
+| **S2** hybrid (RRF, S0+S1) | 0.633 [0.467, 0.800] | 0.767 [0.600, 0.900] | 0.495 [0.345, 0.641] | 0.557 [0.414, 0.692] |
+| **S3** cross-encoder rerank (ms-marco-MiniLM-L-6-v2, over S2's top-20) | 0.667 [0.500, 0.833] | 0.700 [0.533, 0.867] | 0.544 [0.389, 0.694] | 0.581 [0.426, 0.725] |
 
 **Dense retrieval alone is worse than the BM25 baseline on this corpus.** This golden
 set skews toward precise-terminology questions ("how does the NAIC model law define
@@ -31,6 +32,17 @@ these deltas are statistically significant at n=30** (every 95% CI crosses zero)
 point estimates favor hybrid; the golden set needs to grow before that's a confident
 claim rather than a plausible one.
 
+**Cross-encoder rerank is not a uniform win — and that's a real finding, not noise.**
+S3 leads on 3 of 4 metrics (recall@5, MRR, nDCG@10 all improve over S2), consistent
+with what reranking is good at: putting the single best-matching chunk at the very
+top. But recall@10 actually *drops* (0.767 → 0.700). The reranker only reorders S2's
+top-20 candidate pool — it can't recover a chunk S2 never retrieved — and reordering
+by the cross-encoder's own judgment can push a chunk that was inside S2's top-10 (and
+therefore counted toward recall@10) down past rank 10, even while the chunk it
+promoted instead is a better match by the cross-encoder's more accurate joint
+scoring. Precision-at-the-top and recall-at-a-fixed-cutoff are different objectives;
+optimizing one doesn't guarantee the other improves too.
+
 ### Generation quality (citation precision, groundedness, refusal accuracy — 95% bootstrap CI)
 
 | Retriever used for generation | citation precision | groundedness | refusal accuracy | false refusal rate |
@@ -38,17 +50,19 @@ claim rather than a plausible one.
 | S0 BM25 | 1.000 [1.000, 1.000] (n=26) | 1.000 [1.000, 1.000] (n=24) | 0.917 [0.750, 1.000] (n=12) | 0.200 [0.067, 0.367] (n=30) |
 | S1 dense | 1.000 [1.000, 1.000] (n=24) | 1.000 [1.000, 1.000] (n=21) | 0.917 [0.750, 1.000] (n=12) | 0.300 [0.133, 0.467] (n=30) |
 | S2 hybrid | 1.000 [1.000, 1.000] (n=25) | 0.905 [0.762, 1.000] (n=21) | 0.917 [0.750, 1.000] (n=12) | 0.300 [0.133, 0.467] (n=30) |
+| S3 rerank | 1.000 [1.000, 1.000] (n=25) | 0.957 [0.870, 1.000] (n=23) | 0.917 [0.750, 1.000] (n=12) | 0.233 [0.100, 0.400] (n=30) |
 
 Generation runs on `claude-sonnet-5` with a structured JSON output (answer + inline
 `[chunk_id]` citations + a self-reported `answerable` flag); groundedness is judged by
 `claude-haiku-4-5` against a written claim-by-claim rubric; citation precision is a
 deterministic check (cited chunk actually in the retrieved set), not an LLM judgment.
 
-Refusal accuracy is identical across all three stages (11/12), and groundedness/false-
-refusal differences between them (e.g. S2's 0.905 vs S0/S1's 1.000 groundedness) sit
-well inside each other's confidence intervals — read this as "generation quality is
-roughly stage-invariant here," not "hybrid retrieval hurts generation." Each question
-was judged once, not resampled, so day-to-day model variance is part of that CI width.
+Refusal accuracy is identical across all four stages (11/12 — same 12 unanswerable
+questions, same refusal logic, so this isn't surprising), and groundedness/false-
+refusal differences between stages sit well inside each other's confidence intervals —
+read this as "generation quality is roughly stage-invariant here," not "one retriever
+makes generation meaningfully better or worse." Each question was judged once, not
+resampled, so day-to-day model variance is part of that CI width.
 
 **False refusals are a retrieval problem, not a generation problem.** I traced every
 false refusal under S2 by hand: of the 9 answerable questions the model refused, **0
@@ -81,7 +95,7 @@ data/manifest.jsonl (committed)          data/golden/golden_questions.json (comm
   ingest/chunk.py → data/processed/chunks.jsonl        │
         │           (section-aware: heading + page)    │
         ▼                                             │
-  retrieval/{bm25,dense,hybrid}.py  ◄───────────────────┘
+  retrieval/{bm25,dense,hybrid,rerank}.py  ◄───────────────┘
         │                                    eval/runner.py
         ▼                                    (recall@k, MRR, nDCG@10,
   generation/generate.py                      bootstrap CI)
@@ -173,9 +187,6 @@ curl -X POST localhost:8000/query -H "Content-Type: application/json" \
   (e.g. "Insurance Data Security Model Law MO-668-2 (c) 2017...") on every page, which
   occasionally inflates lexical similarity for chunks adjacent to the correct one on
   title-mentioning queries. Documented in the S0 commit, not silently patched over.
-- **S3 (cross-encoder rerank) was cut for time**, not because it's uninteresting —
-  the retrieval interface (`retrieval/base.py`) is designed so adding it is a new
-  file, not a refactor.
 - **Agent/MCP layer is a stub, not a working agent** (see below) — cut deliberately to
   protect the eval harness under a compressed timeline, per an explicit priority call
   made when this project was scoped.
@@ -193,7 +204,8 @@ actually stubbed out, to make the cut concrete rather than purely aspirational.
 ## Tech stack
 
 Python 3.12, `uv` for dependency management, `rank-bm25` for S0, local
-`sentence-transformers` for S1, FastAPI for serving, the Anthropic API for
+`sentence-transformers` for S1 and S3 (bi-encoder + `ms-marco-MiniLM-L-6-v2`
+cross-encoder, both CPU-friendly and free), FastAPI for serving, the Anthropic API for
 generation/judging (Claude Sonnet 5 + Claude Haiku 4.5), Docker for containerization.
 No vector database — 6,500 chunks fit comfortably in memory as a numpy matrix, and
 introducing one would have been complexity without a measured benefit at this corpus
