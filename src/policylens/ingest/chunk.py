@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from policylens.ingest.parse import HEADING_MARK, PAGE_MARK, extract_html_text, extract_pdf_text
+from policylens.ingest.pii import redact_pii
 
 TARGET_CHUNK_WORDS = 300
 OVERLAP_WORDS = 40
@@ -70,7 +71,8 @@ def _window_split(words: list[str], size: int, overlap: int) -> list[list[str]]:
     return windows
 
 
-def chunk_document(doc: dict) -> list[dict]:
+def chunk_document(doc: dict) -> tuple[list[dict], int]:
+    """Returns (chunks, pii_redaction_count)."""
     local_path = Path(doc["local_path"])
     if local_path.suffix == ".pdf":
         marked_text = extract_pdf_text(local_path)
@@ -80,7 +82,10 @@ def chunk_document(doc: dict) -> list[dict]:
     spans = _split_into_spans(marked_text)
     chunks = []
     chunk_index = 0
+    pii_count = 0
     for span in spans:
+        span.text, span_pii_count = redact_pii(span.text)
+        pii_count += span_pii_count
         words = span.text.split()
         if len(words) < MIN_CHUNK_WORDS:
             continue
@@ -100,7 +105,7 @@ def chunk_document(doc: dict) -> list[dict]:
                 }
             )
             chunk_index += 1
-    return chunks
+    return chunks, pii_count
 
 
 def main() -> None:
@@ -108,19 +113,23 @@ def main() -> None:
     CHUNKS_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     total_chunks = 0
+    total_pii_redactions = 0
     with CHUNKS_PATH.open("w") as out:
         for doc in docs:
             try:
-                chunks = chunk_document(doc)
+                chunks, pii_count = chunk_document(doc)
             except Exception as e:
                 print(f"  ! failed to chunk {doc['doc_id']}: {e}")
                 continue
             for c in chunks:
                 out.write(json.dumps(c) + "\n")
             total_chunks += len(chunks)
-            print(f"  {doc['doc_id']}: {len(chunks)} chunks")
+            total_pii_redactions += pii_count
+            pii_note = f", {pii_count} PII redaction(s)" if pii_count else ""
+            print(f"  {doc['doc_id']}: {len(chunks)} chunks{pii_note}")
 
     print(f"\nTotal chunks: {total_chunks} from {len(docs)} documents")
+    print(f"Total PII redactions: {total_pii_redactions}")
     print(f"Written to {CHUNKS_PATH}")
 
 

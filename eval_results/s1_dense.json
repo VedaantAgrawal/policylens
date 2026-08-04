@@ -1,12 +1,12 @@
 {
   "retriever": "s1_dense",
-  "scored_at": "2026-08-02T19:29:52.342221+00:00",
+  "scored_at": "2026-08-04T21:27:00.873640+00:00",
   "num_answerable_questions": 30,
   "num_unanswerable_questions": 12,
   "aggregate": {
     "recall_at_5": {
-      "mean": 0.5166666666666667,
-      "ci_lower": 0.3333333333333333,
+      "mean": 0.5333333333333333,
+      "ci_lower": 0.36666666666666664,
       "ci_upper": 0.7
     },
     "recall_at_10": {
@@ -20,9 +20,9 @@
       "ci_upper": 0.59
     },
     "ndcg_at_10": {
-      "mean": 0.4470314500678158,
-      "ci_lower": 0.28538556137589605,
-      "ci_upper": 0.6076221931866481
+      "mean": 0.44855347292629666,
+      "ci_lower": 0.28744042077632337,
+      "ci_upper": 0.6095444008148703
     }
   },
   "per_query": [
@@ -221,10 +221,10 @@
     {
       "question_id": "q025",
       "category": "state_bulletin",
-      "recall_at_5": 0.5,
+      "recall_at_5": 1.0,
       "recall_at_10": 1.0,
       "mrr": 1.0,
-      "ndcg_at_10": 0.8315546295836225
+      "ndcg_at_10": 0.8772153153380493
     },
     {
       "question_id": "q026",
