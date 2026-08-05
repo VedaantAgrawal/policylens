@@ -395,5 +395,402 @@
     "relevant_chunk_ids": [],
     "category": "unanswerable",
     "notes": "A federal tax code question outside the scope of the state/NAIC/SEC regulatory corpus."
+  },
+  {
+    "question_id": "q043",
+    "question": "Under the NAIC Annual Financial Reporting Model Regulation, what professional body must an 'Accountant' be in good standing with?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_205_3"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the American Institute of Certified Public Accountants (AICPA)."
+  },
+  {
+    "question_id": "q044",
+    "question": "Under the NAIC Variable Annuity Model Regulation, what must be true of a company's licensing before it may deliver or issue variable annuities in a state?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_250_2"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: it must be licensed or organized to do a life insurance or annuity business in that state."
+  },
+  {
+    "question_id": "q045",
+    "question": "Under the NAIC Variable Contract Model Law, what must a contract providing benefits payable in variable amounts contain regarding the insurer's benefit-determination procedures?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_260_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: a statement of the essential features of the procedures used to determine the dollar amount of variable benefits."
+  },
+  {
+    "question_id": "q046",
+    "question": "How does the NAIC Variable Life Insurance Model Regulation define 'variable death benefit'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_270_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the amount of the death benefit, other than incidental insurance benefits, payable under a variable life insurance policy dependent on the investment performance of the separate account."
+  },
+  {
+    "question_id": "q047",
+    "question": "Under the NAIC Model Regulation on Senior-Specific Certifications and Professional Designations, what makes the use of such a certification an unfair and deceptive act?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_278_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: using a certification or designation that indicates or implies in a way that misleads a purchaser or prospective purchaser."
+  },
+  {
+    "question_id": "q048",
+    "question": "Under the NAIC Corporate Governance Annual Disclosure Model Act, by what date each year must an insurer submit its Corporate Governance Annual Disclosure (CGAD) to the Commissioner?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_305_3"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: no later than June 1 of each calendar year."
+  },
+  {
+    "question_id": "q049",
+    "question": "Under the NAIC Life and Health Insurance Guaranty Association Model Act, what event triggers the Act's protection for a member insurer's policies?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_520_0"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the impairment or insolvency of the member insurer that issued the policies, plans, or contracts."
+  },
+  {
+    "question_id": "q050",
+    "question": "Under the NAIC Military Sales Practices Model Regulation, does the regulation apply to the sale of credit insurance?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_568_3"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: no, credit insurance is exempted from the regulation."
+  },
+  {
+    "question_id": "q051",
+    "question": "Under the NAIC Life Insurance Disclosure Model Regulation, what is a 'Buyer's Guide'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_580_3"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the current Life Insurance Buyer's Guide adopted by the NAIC, or language approved by the commissioner."
+  },
+  {
+    "question_id": "q052",
+    "question": "How does the NAIC Universal Life Insurance Model Regulation define 'cash surrender value'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_585_2"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: net cash surrender value plus any amounts outstanding as policy loans."
+  },
+  {
+    "question_id": "q053",
+    "question": "According to the NAIC guidelines on Corporate Owned Life Insurance (COLI), who is generally the applicant, owner, premium payer, and beneficiary of a COLI policy?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_602_0"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the employer."
+  },
+  {
+    "question_id": "q054",
+    "question": "Under the NAIC Accelerated Benefits Model Regulation, what must an insurer obtain from an assignee or irrevocable beneficiary before paying an accelerated benefit?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_620_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: a signed acknowledgement of concurrence for payout (unless the insurer itself is the assignee)."
+  },
+  {
+    "question_id": "q055",
+    "question": "Under the NAIC Insurance Information and Privacy Protection Model Act, what is one example of an 'adverse underwriting decision'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_670_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: a declination of insurance coverage (also termination of coverage, or an agent's failure to apply for coverage)."
+  },
+  {
+    "question_id": "q056",
+    "question": "Under the NAIC Standards for Safeguarding Customer Information Model Regulation, what must each licensee implement?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_673_3"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: a comprehensive written information security program with administrative, technical, and physical safeguards."
+  },
+  {
+    "question_id": "q057",
+    "question": "Under the NAIC Viatical Settlements Model Act, how many activities of daily living must a person be unable to perform to be considered 'chronically ill'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_697_2"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: at least two (2)."
+  },
+  {
+    "question_id": "q058",
+    "question": "Under the NAIC Credit for Reinsurance Model Regulation, when must the commissioner allow credit for reinsurance ceded by a domestic insurer to an assuming insurer?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_786_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: when the assuming insurer was licensed in the state as of the date on which statutory financial statement credit for reinsurance is claimed."
+  },
+  {
+    "question_id": "q059",
+    "question": "Under the NAIC Life and Health Reinsurance Agreements Model Regulation, which insurers does the regulation apply to?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_791_2"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: all domestic life and accident and health insurers, and other licensed life/A&H insurers not subject to a substantially similar regulation in their domiciliary state."
+  },
+  {
+    "question_id": "q060",
+    "question": "How does the NAIC Annuity Nonforfeiture Model Regulation define 'nonforfeiture rate'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_806_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the interest rate used in determining the minimum nonforfeiture amount."
+  },
+  {
+    "question_id": "q061",
+    "question": "Under the NAIC Actuarial Opinion and Memorandum Regulation, what does an 'Actuarial Opinion' address?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_822_3",
+      "naic_822_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: the adequacy of the reserves and related actuarial items based on an asset adequacy analysis."
+  },
+  {
+    "question_id": "q062",
+    "question": "Under the NAIC Unfair Claims Settlement Practices Act, under what two conditions does committing a prohibited act become an 'improper claims practice'?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "naic_900_4"
+    ],
+    "category": "naic_model_law",
+    "notes": "Answer: (A) committed flagrantly and in conscious disregard of the Act, or (B) committed with such frequency as to indicate a general business practice."
+  },
+  {
+    "question_id": "q063",
+    "question": "When was NY DFS Insurance Circular Letter No. 2 (2026) on disaster planning for the life and health insurance industries issued?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ny_002_2"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: May 20, 2026."
+  },
+  {
+    "question_id": "q064",
+    "question": "Under New York regulation 11 NYCRR \u00a7 52.16(c)(8), may a disability income insurance policy reduce benefits based on an estimate of what an insured may receive under workers' compensation, rather than what has actually been paid?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ny_008_2"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: no \u2014 mandatory offset provisions based on an estimate rather than actual benefits received are not permitted."
+  },
+  {
+    "question_id": "q065",
+    "question": "What was California's total aggregate Principle-Based Reserving assessment for long-term care insurers for Fiscal Year 2025-26?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ca_001_0"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: $1,329,000."
+  },
+  {
+    "question_id": "q066",
+    "question": "Under California Insurance Code section 10489.992(b)(1), what was the total aggregate Principle-Based Reserving assessment for life insurers for Fiscal Year 2025-26?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ca_002_0"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: $3,078,000."
+  },
+  {
+    "question_id": "q067",
+    "question": "What was California's aggregate Principle-Based Reserving assessment for long-term care insurers for Fiscal Year 2024-25?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_ca_013_0"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: $1,433,000 (distinct from the FY 2025-26 figure of $1,329,000 in a separate bulletin)."
+  },
+  {
+    "question_id": "q068",
+    "question": "According to TDI Commissioner's Bulletin B-0005-26, what was the overall private passenger automobile rate increase approved for the Texas Automobile Insurance Plan Association, effective November 1, 2026?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_001_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: 2.8%."
+  },
+  {
+    "question_id": "q069",
+    "question": "Under TDI's calendar year 2025 disallowed expenses data call, by what date must the completed form and affidavit be submitted?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_002_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: no later than July 24, 2026."
+  },
+  {
+    "question_id": "q070",
+    "question": "Under what Texas Insurance Code section is TDI's 2025 property direct written premium data call for the Texas catastrophe area authorized?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_004_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: Section 2210.052."
+  },
+  {
+    "question_id": "q071",
+    "question": "Under TDI's 2025 call for annual experience and workers' compensation deductible plans, how long must respondents retain underlying source documents after submission?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_006_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: until at least February 6, 2027."
+  },
+  {
+    "question_id": "q072",
+    "question": "Under Texas House Bill 2067, which lines of insurance are covered in TDI's Phase 1 implementation of declination/cancellation/nonrenewal reporting requirements?",
+    "answerable": true,
+    "relevant_chunk_ids": [
+      "state_tx_014_3"
+    ],
+    "category": "state_bulletin",
+    "notes": "Answer: Residential Property and Private Passenger Automobile Insurance."
+  },
+  {
+    "question_id": "q073",
+    "question": "What is New York Life Insurance Company's total surplus as of its most recent statutory filing?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "New York Life is a mutual company, not in the corpus (no SEC 10-K; mutuals don't file them)."
+  },
+  {
+    "question_id": "q074",
+    "question": "What is Guardian Life Insurance Company of America's current financial strength rating from A.M. Best?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Guardian Life is a mutual company not in the corpus, and A.M. Best ratings aren't corpus content regardless."
+  },
+  {
+    "question_id": "q075",
+    "question": "What does the Illinois Department of Insurance's most recent bulletin say about crop insurance requirements?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Illinois is not one of the three state bulletin jurisdictions in the corpus (NY/CA/TX only)."
+  },
+  {
+    "question_id": "q076",
+    "question": "According to the Pennsylvania Insurance Department, what are the continuing education requirements for insurance producers?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Pennsylvania is not one of the three state bulletin jurisdictions in the corpus (NY/CA/TX only)."
+  },
+  {
+    "question_id": "q077",
+    "question": "What was MetLife's net income for the second quarter of 2026?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "The corpus has annual 10-Ks only, not quarterly figures."
+  },
+  {
+    "question_id": "q078",
+    "question": "What was Lincoln National Corporation's total revenue reported in its most recent Form 10-Q?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "The corpus contains 10-Ks (annual), not 10-Qs (quarterly) \u2014 a filing-type trap distinct from q077's quarter trap."
+  },
+  {
+    "question_id": "q079",
+    "question": "Under the NAIC Medicare Supplement Insurance Minimum Standards Model Act, what is the minimum loss ratio insurers must maintain?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "NAIC Model #650 was deliberately excluded from the curated NAIC set (life/annuity/reinsurance/solvency-focused) \u2014 tests against false-positive retrieval, same pattern as the existing Long-Term Care (#640) trap."
+  },
+  {
+    "question_id": "q080",
+    "question": "What does NAIC's 2027 model bulletin on quantum-computing risk in insurance underwriting require of insurers?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "No such model bulletin exists \u2014 future-dated and fabricated-sounding, like the existing AI-underwriting-model-number trap."
+  },
+  {
+    "question_id": "q081",
+    "question": "What is the current federal funds interest rate set by the Federal Reserve?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Out-of-domain \u2014 monetary policy, not insurance regulation or company filings."
+  },
+  {
+    "question_id": "q082",
+    "question": "What percentage of MetLife's individual life insurance policyholders filed a claim in 2025?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "An operational claims-rate statistic like this is not the kind of figure a 10-K reports."
+  },
+  {
+    "question_id": "q083",
+    "question": "What did the Ohio Department of Insurance report about its 2026 examination of MassMutual?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Double miss: Ohio is not a corpus jurisdiction, and MassMutual (a mutual) is not a corpus entity."
+  },
+  {
+    "question_id": "q084",
+    "question": "Under IRC Section 7702, what is the federal definition of a life insurance contract for tax purposes?",
+    "answerable": false,
+    "relevant_chunk_ids": [],
+    "category": "unanswerable",
+    "notes": "Federal tax code is out of scope \u2014 the corpus is state/NAIC insurance regulation and company filings, not the Internal Revenue Code."
   }
 ]
