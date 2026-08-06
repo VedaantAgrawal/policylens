@@ -36,6 +36,14 @@ ISSUERS: list[Issuer] = [
     Issuer(ticker="BHF", name="Brighthouse Financial, Inc.", cik="0001685040"),
     Issuer(ticker="CRBG", name="Corebridge Financial, Inc.", cik="0001889539"),
     Issuer(ticker="UNM", name="Unum Group", cik="0000005513"),
+    # Added when growing the corpus toward the original 300-800 doc target —
+    # CIKs verified live against sec.gov/files/company_tickers.json, not
+    # recalled from memory.
+    Issuer(ticker="PFG", name="Principal Financial Group Inc", cik="0001126328"),
+    Issuer(ticker="GL", name="Globe Life Inc.", cik="0000320335"),
+    Issuer(ticker="VOYA", name="Voya Financial, Inc.", cik="0001535929"),
+    Issuer(ticker="GNW", name="Genworth Financial Inc", cik="0001276520"),
+    Issuer(ticker="FG", name="F&G Annuities & Life, Inc.", cik="0001934850"),
 ]
 
 # NAIC model law numbers relevant to life insurance, annuities, reinsurance, and
@@ -91,6 +99,67 @@ NAIC_MODEL_LAWS: dict[str, str] = {
     "896": "Unfair Discrimination Against Subjects of Abuse in Life Insurance Model Act",
     "900": "Unfair Claims Settlement Practices Act",
     "903": "Unfair Life, Accident and Health Claims Settlement Practices Model Regulation",
+    # Second wave, added when growing the corpus toward the original 300-800
+    # doc target: producer licensing/market conduct, investments, receivership,
+    # reinsurance completions, mortality tables, fraud, and unfair-discrimination
+    # completions. Deliberately excludes 640/641/642/643 (Long-Term Care) and
+    # 650/651/660 (Medicare Supplement) — those are the golden set's
+    # deliberate-exclusion trap questions (q079 and the original LTC question);
+    # adding them would silently turn a designed-unanswerable question answerable.
+    "218": "Producer Licensing Model Act",
+    "225": "Managing General Agents Act",
+    "228": "Public Adjuster Licensing Model Act",
+    "230": "Title Insurance Agent Model Act",
+    "235": "Interest-Indexed Annuity Contracts Model Regulation",
+    "240": "Charitable Gift Annuities Model Act",
+    "241": "Charitable Gift Annuities Exemption Model Act",
+    "280": "Investments of Insurers Model Act (Defined Limits Version)",
+    "282": "Derivative Instruments Model Regulation",
+    "283": "Investments of Insurers Model Act (Defined Standards Version)",
+    "285": "Disclosure of Material Transactions Model Act",
+    "290": "Protected Cell Company Model Act",
+    "295": "Model Act on Custodial Agreements and the Use of Clearing Corporations",
+    "298": "Model Regulation on Custodial Agreements and the Use of Clearing Corporations",
+    "315": "Risk-Based Capital (RBC) for Health Organizations Model Act",
+    "540": "Property and Casualty Insurance Guaranty Association Model Act",
+    "555": "Insurer Receivership Model Act",
+    "558": "Administrative Supervision Model Act",
+    "590": "Model Policy Loan Interest Rate Bill",
+    "628": "Title Insurers Model Act",
+    "630": "Mortgage Guaranty Insurance Model Act",
+    "631": "Real Property Lender-Placed Insurance Model Act",
+    "632": "Travel Insurance Model Act",
+    "633": "Pet Insurance Model Act",
+    "675": "Uniform Fraternal Code",
+    "680": "Insurance Fraud Prevention Model Act",
+    "685": "Service Contracts Model Act",
+    "693": "Market Conduct Surveillance Model Law",
+    "695": "Synthetic Guaranteed Investment Contracts Model Regulation",
+    "698": "Viatical Settlements Model Regulation",
+    "700": "Insurance Statute—Atomic Energy Exclusion",
+    "705": "Model Risk Retention Act",
+    "745": "Property and Casualty Actuarial Opinion Model Law",
+    "789": "Special Purpose Reinsurance Vehicle Model Act",
+    "790": "Reinsurance Intermediary Model Act",
+    "803": "Assumption Reinsurance Model Act",
+    "811": "NAIC Procedure for Permitting Same Minimum Nonforfeiture Standards for Men and Women",
+    "814": "NAIC Model Rule Permitting Smoker/Nonsmoker Mortality Tables",
+    "817": "Preneed Life Insurance Minimum Standards Model Regulation",
+    "818": "Determining Reserve Liabilities for Credit Life Insurance Model Regulation",
+    "821": "NAIC Model Rule for Recognizing a New Annuity Mortality Table",
+    "840": "Unauthorized Insurers False Advertising Process Act",
+    "850": "Unauthorized Insurers Process Act",
+    "870": "Nonadmitted Insurance Model Act",
+    "884": "Model Regulation for Complaint Records Pursuant to the Unfair Trade Practices Act",
+    "888": "Model Regulation on Unfair Discrimination on the Basis of Blindness or Partial Blindness",
+    "890": "Unauthorized Transaction of Criminal Model Act",
+    "895": "Unfair Discrimination Against Subjects of Abuse in Health Benefit Plans Model Act",
+    "897": "Unfair Discrimination Against Subjects of Abuse in Disability Income Insurance Model Act",
+    "898": "Unfair Discrimination Against Subjects of Abuse in Property and Casualty Insurance",
+    "902": "Unfair Property/Casualty Claims Settlement Practices Model Regulation",
+    "910": "Market Conduct Record Retention and Production Model Regulation",
+    "915": "Improper Termination Practices Model Act",
+    "920": "Home Service Disclosure Model Act",
 }
 
 # State DOI/DFS sources. Massachusetts was dropped: mass.gov returns 403 to
@@ -104,5 +173,6 @@ STATE_BULLETIN_LISTING_PAGES: dict[str, str] = {
 }
 
 # Cap per state so the corpus stays balanced across jurisdictions rather than
-# whichever site happens to list the most documents.
-MAX_BULLETINS_PER_STATE = 20
+# whichever site happens to list the most documents. Raised from 20 when
+# growing the corpus toward the original 300-800 doc target.
+MAX_BULLETINS_PER_STATE = 35

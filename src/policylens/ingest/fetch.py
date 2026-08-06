@@ -57,39 +57,50 @@ def _write(path: Path, content: bytes) -> None:
     path.write_bytes(content)
 
 
+SEC_10KS_PER_ISSUER = 3  # most recent N annual filings — real content, same real companies
+
+
 def fetch_sec_10ks() -> list[ManifestEntry]:
     entries = []
     for issuer in ISSUERS:
         submissions = _get(f"https://data.sec.gov/submissions/CIK{issuer.cik}.json").json()
         recent = submissions["filings"]["recent"]
         forms = recent["form"]
-        idx = next((i for i, f in enumerate(forms) if f == "10-K"), None)
-        if idx is None:
+        indices = [i for i, f in enumerate(forms) if f == "10-K"][:SEC_10KS_PER_ISSUER]
+        if not indices:
             print(f"  ! no 10-K found for {issuer.ticker}, skipping")
             continue
 
-        accession = recent["accessionNumber"][idx].replace("-", "")
-        primary_doc = recent["primaryDocument"][idx]
-        filing_date = recent["filingDate"][idx]
         cik_int = str(int(issuer.cik))
-        doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{accession}/{primary_doc}"
+        for position, idx in enumerate(indices):
+            accession = recent["accessionNumber"][idx].replace("-", "")
+            primary_doc = recent["primaryDocument"][idx]
+            filing_date = recent["filingDate"][idx]
+            doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{accession}/{primary_doc}"
 
-        resp = _get(doc_url)
-        local_path = DATA_RAW / "sec_10k" / f"{issuer.ticker}_{filing_date}.html"
-        _write(local_path, resp.content)
+            resp = _get(doc_url)
+            local_path = DATA_RAW / "sec_10k" / f"{issuer.ticker}_{filing_date}.html"
+            _write(local_path, resp.content)
 
-        entries.append(
-            ManifestEntry(
-                doc_id=f"sec10k_{issuer.ticker}",
-                source_type="sec_10k",
-                title=f"{issuer.name} 10-K ({filing_date})",
-                url=doc_url,
-                local_path=str(local_path),
-                fetched_at=datetime.now(timezone.utc).isoformat(),
-                extra={"ticker": issuer.ticker, "cik": issuer.cik, "filing_date": filing_date},
+            # The most recent filing keeps the original bare doc_id
+            # (sec10k_{ticker}) — the existing golden set's chunk_ids
+            # (e.g. sec10k_MET_66) assume that exact id and would silently
+            # break if it grew a date suffix. Older filings get one, since
+            # they're new documents with no existing references to preserve.
+            doc_id = f"sec10k_{issuer.ticker}" if position == 0 else f"sec10k_{issuer.ticker}_{filing_date}"
+
+            entries.append(
+                ManifestEntry(
+                    doc_id=doc_id,
+                    source_type="sec_10k",
+                    title=f"{issuer.name} 10-K ({filing_date})",
+                    url=doc_url,
+                    local_path=str(local_path),
+                    fetched_at=datetime.now(timezone.utc).isoformat(),
+                    extra={"ticker": issuer.ticker, "cik": issuer.cik, "filing_date": filing_date},
+                )
             )
-        )
-        print(f"  fetched {issuer.ticker} 10-K ({filing_date})")
+            print(f"  fetched {issuer.ticker} 10-K ({filing_date})")
     return entries
 
 
