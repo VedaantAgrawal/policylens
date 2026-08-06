@@ -2,413 +2,1282 @@
   "retriever": "s3_rerank",
   "generation_model": "claude-sonnet-5",
   "judge_model": "claude-haiku-4-5",
-  "scored_at": "2026-08-04T21:36:11.345862+00:00",
-  "num_answerable_questions": 30,
-  "num_unanswerable_questions": 12,
+  "scored_at": "2026-08-06T00:27:44.776965+00:00",
+  "num_answerable_questions": 60,
+  "num_unanswerable_questions": 24,
   "aggregate": {
     "refusal_accuracy": {
       "mean": 0.9166666666666666,
-      "ci_lower": 0.75,
+      "ci_lower": 0.7916666666666666,
       "ci_upper": 1.0,
-      "n": 12
+      "n": 24
     },
     "citation_precision": {
       "mean": 1.0,
       "ci_lower": 1.0,
       "ci_upper": 1.0,
-      "n": 25
+      "n": 52
     },
     "groundedness": {
-      "mean": 0.9565217391304348,
-      "ci_lower": 0.8695652173913043,
+      "mean": 0.9361702127659575,
+      "ci_lower": 0.851063829787234,
       "ci_upper": 1.0,
-      "n": 23
+      "n": 47
     },
     "false_refusal_rate": {
-      "mean": 0.23333333333333334,
-      "ci_lower": 0.1,
-      "ci_upper": 0.4,
-      "n": 30
+      "mean": 0.21666666666666667,
+      "ci_lower": 0.11666666666666667,
+      "ci_upper": 0.3333333333333333,
+      "n": 60
     }
   },
   "per_query": [
     {
       "question_id": "q001",
+      "question": "Under the NAIC Standard Nonforfeiture Law for Life Insurance, within how many days after a premium due date must a policyholder request a paid-up nonforfeiture benefit following default?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "A policyholder must make a proper request for a paid-up nonforfeiture benefit not later than sixty (60) days after the due date of the premium in default [naic_808_1][naic_808_2].",
+      "citations": [
+        "naic_808_1",
+        "naic_808_2"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately states that a policyholder must make a proper request for a paid-up nonforfeiture benefit not later than sixty (60) days after the due date of the premium in default, which is directly supported by the source text from naic_808_1 that explicitly states this requirement."
     },
     {
       "question_id": "q002",
+      "question": "Under the NAIC Standard Valuation Law, who is responsible for annually valuing the reserve liabilities of life insurance policies issued before the operative date of the Valuation Manual?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "The commissioner is responsible for annually valuing, or causing to be valued, the reserve liabilities for all outstanding life insurance policies (and annuity and pure endowment contracts) issued on or after the original effective date of the Standard Valuation Law in the state and prior to the operative date of the Valuation Manual [naic_820_3]. In lieu of valuing reserves for a foreign or alien company, the commissioner may accept a valuation made by the insurance supervisory official of another state or jurisdiction that complies with the minimum standard of the Act [naic_820_4].",
+      "citations": [
+        "naic_820_3",
+        "naic_820_4"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately states that the commissioner is responsible for annually valuing, or causing to be valued, the reserve liabilities for life insurance policies issued on or after the original effective date of the Standard Valuation Law and prior to the operative date of the Valuation Manual, and correctly cites the provision allowing the commissioner to accept valuations from other jurisdictions that comply with minimum standards."
     },
     {
       "question_id": "q003",
+      "question": "How does the NAIC Insurance Data Security Model Law define an 'Authorized Individual'?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": false,
+      "answer": "The provided sources do not include the text of the NAIC Insurance Data Security Model Law's definitions section, including its definition of 'Authorized Individual.' One source mentions the Model Law's existence and general purpose but does not quote its definitions [sec10k_UNM_2025-02-27_69]. The other sources are from different NAIC model acts (Privacy Protection Model Act, Privacy of Consumer Financial and Health Information Regulation, Group Life Insurance Model Act) and do not address this definition.",
+      "citations": [
+        "sec10k_UNM_2025-02-27_69"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q004",
+      "question": "What standard of conduct does the NAIC Suitability in Annuity Transactions Model Regulation require producers to meet when recommending an annuity?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "The NAIC Suitability in Annuity Transactions Model Regulation (#275), as revised in 2020, imposes a best interest standard of care on producers and insurers when recommending annuities. Under this standard, all recommendations must be in the best interest of the consumer under the known circumstances at the time the recommendation is made, without placing the agent's or insurer's financial interests ahead of the consumer's interest [sec10k_CRBG_139][sec10k_CRBG_2024-02-15_139][sec10k_CRBG_2025-02-13_139]. This is also described as requiring producers to act in the best interest of the consumer when recommending annuities [sec10k_BHF_2024-02-22_88][sec10k_BHF_2025-02-28_88].",
+      "citations": [
+        "sec10k_CRBG_139",
+        "sec10k_CRBG_2024-02-15_139",
+        "sec10k_CRBG_2025-02-13_139",
+        "sec10k_BHF_2024-02-22_88",
+        "sec10k_BHF_2025-02-28_88"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately reflects the source text: the NAIC Model Regulation #275 (adopted in 2020) implements a best interest standard of care requiring all recommendations by agents and insurers to be in the best interest of the consumer under known circumstances at the time the recommendation is made, without placing agents' or insurers' financial interests ahead of the consumer's interest, as explicitly stated in all cited source chunks."
     },
     {
       "question_id": "q005",
+      "question": "What is the stated purpose of the NAIC Life Insurance Illustrations Model Regulation?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "The regulation's stated purpose is to provide rules for life insurance policy illustrations that protect consumers and foster consumer education by providing illustration formats, prescribing standards for use of illustrations, and specifying required disclosures [naic_582_0]. Its goals are to ensure illustrations do not mislead purchasers of life insurance and to make illustrations more understandable, including eliminating footnotes and caveats where possible and defining terms in language understandable to the typical intended reader [naic_582_0].",
+      "citations": [
+        "naic_582_0"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All claims in the answer are directly supported by the source text, including the stated purpose of protecting consumers and fostering education, the regulation's provisions for illustration formats and disclosures, and the goals to prevent misleading illustrations and improve understandability through eliminating footnotes and using clear language."
     },
     {
       "question_id": "q006",
+      "question": "Under the NAIC Risk Management and ORSA Model Act, how frequently must an insurer conduct an Own Risk and Solvency Assessment at minimum?",
       "category": "naic_model_law",
       "gold_answerable": true,
-      "model_answerable": false,
+      "model_answerable": true,
+      "answer": "The sources indicate that insurers must submit ORSA summary reports annually, meaning the assessment is conducted at least once per year [sec10k_CRBG_122][sec10k_CRBG_2024-02-15_127]. The assessment must be documented in a confidential annual summary report provided to regulators [sec10k_BHF_73][sec10k_BHF_2025-02-28_71][sec10k_BHF_2024-02-22_72].",
+      "citations": [
+        "sec10k_CRBG_122",
+        "sec10k_CRBG_2024-02-15_127",
+        "sec10k_BHF_73",
+        "sec10k_BHF_2025-02-28_71",
+        "sec10k_BHF_2024-02-22_72"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": true,
+      "judge_reasoning": "The source text explicitly states that ORSA requires insurers to 'submit annual ORSA summary reports' and that 'the assessment must be documented in a confidential annual summary report,' which directly supports the answer's claim that insurers must conduct the assessment at least once per year and document it in a confidential annual summary report provided to regulators."
     },
     {
       "question_id": "q007",
+      "question": "Under the NAIC Credit for Reinsurance Model Law, when is a domestic ceding insurer allowed credit for reinsurance ceded?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Credit for reinsurance shall be allowed to a domestic ceding insurer, as either an asset or a reduction from liability, only when the assuming reinsurer meets the requirements of Subsections A, B, C, D, E, F or G of the Model Law's credit section [naic_785_1]. Under Subsection A, credit is allowed when reinsurance is ceded to an assuming insurer licensed to transact insurance or reinsurance in the ceding insurer's state [naic_785_1][naic_786_4]. Under Subsection C, credit is allowed when the assuming insurer is domiciled in (or, for a U.S. branch of an alien insurer, entered through) a state employing substantially similar credit-for-reinsurance standards [naic_786_8]. Under Subsection D, credit is allowed when the assuming insurer maintains a qualifying trust fund in a U.S. financial institution\u2014generally not less than its liabilities to U.S. ceding insurers plus a $20,000,000 trusteed surplus\u2014for payment of valid claims [naic_786_10]. Credit may also be allowed for cessions to certified reinsurers based on security held consistent with the reinsurer's assigned rating [naic_786_27]. Additionally, credit under Subsections A, B, or C is limited to cessions of business the assuming insurer is licensed or permitted to write in its domiciliary state, and credit under C or D further requires that applicable requirements of Subsection H are satisfied [naic_785_1]. The commissioner may also adopt regulations addressing valuation of assets/reserve credits, required security amounts/forms, and circumstances for reducing or eliminating credit [naic_785_1].",
+      "citations": [
+        "naic_785_1",
+        "naic_786_4",
+        "naic_786_8",
+        "naic_786_10",
+        "naic_786_27"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All major claims in the answer are supported by the source text: credit is allowed when assuming reinsurer meets requirements of Subsections A-G (naic_785_1), Subsection A requires licensure in ceding insurer's state (naic_785_1, naic_786_4), Subsection C requires domiciliation in state with similar standards (naic_786_8), Subsection D requires qualifying trust fund of not less than liabilities plus $20,000,000 trusteed surplus (naic_786_10), credit for certified reinsurers is based on security consistent with assigned rating (naic_786_27), and credit under A/B/C is limited to licensed business and C/D require Subsection H compliance (naic_785_1), and commissioner may adopt regulations on valuation, security amounts, and credit reduction circumstances (naic_785_1)."
     },
     {
       "question_id": "q008",
+      "question": "How does the NAIC Risk-Based Capital (RBC) Model Act define a 'Corrective Order'?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": false,
-      "citation_precision": null,
+      "answer": "The sources describe corrective action generally under the RBC Model Act, including notification of a corrective order to a health organization under a related model act [naic_315_24], but none of the provided sources contain the specific textual definition of 'Corrective Order' as used in the Risk-Based Capital (RBC) Model Act for insurers.",
+      "citations": [
+        "naic_315_24"
+      ],
+      "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q009",
+      "question": "Under the NAIC Unfair Trade Practices Act, under what conditions does a practice defined in Section 4 constitute an unfair trade practice under Section 3?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "A practice defined in Section 4 constitutes an unfair trade practice under Section 3 if it is (A) committed flagrantly and in conscious disregard of the Act or any rules promulgated under it, or (B) committed with such frequency as to indicate a general business practice of engaging in that type of conduct [naic_880_53][naic_880_4].",
+      "citations": [
+        "naic_880_53",
+        "naic_880_4"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately paraphrases the two conditions from Section 3 (naic_880_53): condition A matches 'committed flagrantly and in conscious disregard of this Act or of any rules promulgated hereunder' and condition B matches 'committed with such frequency to indicate a general business practice to engage in that type of conduct.'"
     },
     {
       "question_id": "q010",
+      "question": "What does the NAIC Annuity Disclosure Model Regulation define as the 'Buyer's Guide'?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "The regulation defines 'Buyer's Guide' as the National Association of Insurance Commissioner's approved Annuity Buyer's Guide [naic_245_3].",
+      "citations": [
+        "naic_245_3"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately quotes the source text's definition of 'Buyer's Guide' as the National Association of Insurance Commissioner's approved Annuity Buyer's Guide, with proper citation to naic_245_3."
     },
     {
       "question_id": "q011",
+      "question": "What is the stated purpose of the NAIC Life Insurance and Annuities Replacement Model Regulation?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "The regulation's stated purpose is twofold: (1) to regulate the activities of insurers and producers with respect to the replacement of existing life insurance and annuities, and (2) to protect the interests of life insurance and annuity purchasers by establishing minimum standards of conduct to be observed in replacement or financed purchase transactions. It aims to: assure that purchasers receive information with which a decision can be made in their own best interest; reduce the opportunity for misrepresentation and incomplete disclosure; and establish penalties for failure to comply with the regulation's requirements [naic_613_1].",
+      "citations": [
+        "naic_613_1"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer are directly supported by the source text: the twofold purpose (regulating insurers/producers and protecting purchasers), the three aims (assuring information, reducing misrepresentation, establishing penalties), and the application to replacement or financed purchase transactions are all explicitly stated in the source."
     },
     {
       "question_id": "q012",
+      "question": "Under the NAIC Standard Nonforfeiture Law for Individual Deferred Annuities, what must a company grant upon cessation of payment of considerations under a contract?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": false,
+      "answer": "The provided sources do not contain the specific text of the Standard Nonforfeiture Law for Individual Deferred Annuities addressing paid-up annuity benefits or other requirements upon cessation of premium payments. The excerpts cover equity-indexed benefit adjustments, applicability exclusions, and transfer calculations, but not this specific provision.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q013",
+      "question": "How does the NAIC Insurance Data Security Model Law define a 'Third-Party Service Provider'?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": false,
-      "citation_precision": null,
+      "answer": "The provided sources describe Licensee obligations regarding oversight of Third-Party Service Providers, such as due diligence in selection and requiring appropriate security measures [naic_668_12], and notification duties involving Third-Party Service Providers during Cybersecurity Events [naic_668_20], but none of the sources contain the actual definition of the term 'Third-Party Service Provider' as set out in the Model Law's definitions section.",
+      "citations": [
+        "naic_668_12",
+        "naic_668_20"
+      ],
+      "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q014",
+      "question": "Under the NAIC Insurance Holding Company System Model Regulation, which companies must complete the Stockholder Information Supplement?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": false,
+      "answer": "The provided sources discuss general insurance holding company registration, control, and enterprise risk reporting requirements under the NAIC Insurance Holding Company System Model Act and Model Regulation, but none of them mention a 'Stockholder Information Supplement' or specify which companies must complete it. Additional sources describing that specific supplement would be needed to answer this question.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q015",
+      "question": "How does the NAIC Risk Management and ORSA Model Act define 'insurance group' for purposes of conducting an ORSA?",
       "category": "naic_model_law",
       "gold_answerable": true,
-      "model_answerable": true,
-      "citation_precision": 1.0,
+      "model_answerable": false,
+      "answer": "The provided sources include the Model Act's definitions of 'Own Risk and Solvency Assessment,' 'ORSA Guidance Manual,' and 'ORSA Summary Report' [naic_505_2], but they do not include the specific definition of 'insurance group' used for purposes of conducting an ORSA. None of the other sources provide this definition either [sec10k_CRBG_122][sec10k_CRBG_2024-02-15_127][sec10k_GNW_2025-02-28_84][sec10k_CRBG_2025-02-13_126].",
+      "citations": [],
+      "citation_precision": null,
       "parse_error": false,
-      "grounded": true
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q016",
+      "question": "What is the official title given to NAIC Model #820 under its own Section 1?",
       "category": "naic_model_law",
       "gold_answerable": true,
       "model_answerable": false,
+      "answer": "The provided sources for Model #820 (titled \"Standard Valuation Law\" per the document headers) do not include the actual Section 1 text stating the official short title of the model. The excerpts cover Section 14 (confidentiality) and provisions on annuity mortality tables, but not Section 1's title language.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q017",
+      "question": "According to Brighthouse Financial's 10-K, how does the company describe its position in the annuity and life insurance market?",
       "category": "sec_10k",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Brighthouse Financial describes itself as one of the largest providers of annuity and life insurance products in the U.S., delivering its products through multiple independent distribution channels and marketing arrangements with a diverse network of distribution partners [sec10k_BHF_2024-02-22_299][sec10k_BHF_29][sec10k_BHF_2024-02-22_28]. As of December 31, 2023, it had over 2.3 million annuity contracts and insurance policies in force, a figure that grew to over 2.0 million by December 31, 2025 (reflecting run-off of certain blocks) [sec10k_BHF_2024-02-22_28][sec10k_BHF_29]. The company primarily transacts business through its insurance subsidiaries Brighthouse Life Insurance Company, Brighthouse Life Insurance Company of NY (BHNY), and New England Life Insurance Company (NELICO), though NELICO does not currently write new business [sec10k_BHF_29][sec10k_BHF_2024-02-22_28]. It describes itself as a financially disciplined company emphasizing independent distribution, aiming to offer a targeted set of products to serve customers and distribution partners in order to enhance its ability to invest in the business and distribute cash to shareholders over time [sec10k_BHF_29][sec10k_BHF_2024-02-22_28]. The company also believes demographic trends\u2014such as an increase in under-insured individuals, risks to governmental social safety net programs, and the shift of retirement planning responsibility to individuals\u2014will create opportunities for significant demand for its products [sec10k_BHF_29][sec10k_BHF_2024-02-22_28]. The company is organized into segments including Annuities, Life, and Run-off, with certain results reported in Corporate & Other [sec10k_BHF_2024-02-22_299].",
+      "citations": [
+        "sec10k_BHF_2024-02-22_299",
+        "sec10k_BHF_2024-02-22_28",
+        "sec10k_BHF_29"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": false,
+      "judge_reasoning": "The answer claims that as of December 31, 2023, the company had over 2.3 million annuity contracts and policies in force, which grew to over 2.0 million by December 31, 2025 - but this represents a decrease, not growth. The source text shows 2.3 million at December 31, 2023 and 2.0 million at December 31, 2025, with the answer's parenthetical explanation '(reflecting run-off of certain blocks)' acknowledging this is a decline, contradicting the use of 'grew to' which implies an increase."
     },
     {
       "question_id": "q018",
+      "question": "According to Unum Group's 10-K, in which countries does the company primarily operate?",
       "category": "sec_10k",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Unum Group and its subsidiaries operate primarily in the United States, the United Kingdom, and Poland, and to a limited extent in certain other countries [sec10k_UNM_34].",
+      "citations": [
+        "sec10k_UNM_34"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately reflects the source text, which explicitly states that Unum Group and its subsidiaries 'operate in the United States, the United Kingdom, Poland, and, to a limited extent, in certain other countries,' matching the answer's claim about primary operations in these three countries with limited operations in other countries."
     },
     {
       "question_id": "q019",
+      "question": "According to Lincoln National's 10-K risk factors, what could a downgrade in the company's financial strength or credit ratings limit or increase?",
       "category": "sec_10k",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "A downgrade in Lincoln National's financial strength or credit ratings could limit its ability to market products, increase the number or value of policies being surrendered, and/or hurt its relationships with creditors [sec10k_LNC_71][sec10k_LNC_2025-02-21_69][sec10k_LNC_2024-02-22_71].",
+      "citations": [
+        "sec10k_LNC_71",
+        "sec10k_LNC_2025-02-21_69",
+        "sec10k_LNC_2024-02-22_71"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All three claims in the answer\u2014that a downgrade could limit ability to market products, increase surrenders, and/or hurt creditor relationships\u2014are directly supported by identical language appearing in all three cited source chunks from Lincoln National's 10-K filings."
     },
     {
       "question_id": "q020",
+      "question": "What does Corebridge Financial's 10-K risk factors summary say its business is subject to?",
       "category": "sec_10k",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "According to Corebridge's 10-K risk factors summary, its business is subject to risks associated with the Tax Matters Agreement with AIG, including potential liability for U.S. income taxes of the entire AIG Consolidated Tax Group for all taxable years or portions thereof in which Corebridge or its subsidiaries were members of that group [sec10k_CRBG_162][sec10k_CRBG_2025-02-13_166]. It is also subject to the risk that anti-takeover provisions could discourage, delay, or prevent a change in control, even if beneficial to shareholders [sec10k_CRBG_162][sec10k_CRBG_2025-02-13_166]. The 2025-filed (2025-02-13) risk factors summary additionally notes potentially higher U.S. federal income taxes due to Corebridge's inability to file a single U.S. consolidated federal income tax return for five years following its IPO and separation from AIG, which caused an 'ownership change' for U.S. federal income tax purposes, as well as challenges related to compliance with applicable laws incident to being a public company, which is expensive and time-consuming [sec10k_CRBG_2025-02-13_166]. The filings note these risk factors could have a significant or material adverse effect on Corebridge's businesses, results of operations, financial condition or liquidity, and could cause significant fluctuations and volatility in the trading price of its securities [sec10k_CRBG_162][sec10k_CRBG_2025-02-13_166].",
+      "citations": [
+        "sec10k_CRBG_162",
+        "sec10k_CRBG_2025-02-13_166"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All specific risk factors mentioned in the answer\u2014Tax Matters Agreement liability, anti-takeover provisions, inability to file consolidated tax returns for five years due to ownership change, and compliance challenges as a public company\u2014are directly supported by the source text, along with the statement about potential material adverse effects and trading price volatility."
     },
     {
       "question_id": "q021",
+      "question": "According to MetLife's 10-K, what are the four key areas of opportunity the company is prioritizing for growth?",
       "category": "sec_10k",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Under its New Frontier strategy, MetLife prioritizes growth across four key areas of opportunity: extending its leadership in Group Benefits, capitalizing on its unique retirement platform, accelerating growth in asset management, and expanding in high growth international markets [sec10k_MET_66][sec10k_MET_65].",
+      "citations": [
+        "sec10k_MET_66",
+        "sec10k_MET_65"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All four key areas of opportunity listed in the answer\u2014extending leadership in Group Benefits, capitalizing on the unique retirement platform, accelerating growth in asset management, and expanding in high growth international markets\u2014are explicitly stated in the source text from sec10k_MET_65 as part of MetLife's New Frontier strategy."
     },
     {
       "question_id": "q022",
+      "question": "According to Prudential Financial's 10-K, what are the company's principal operating segments/businesses?",
       "category": "sec_10k",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Prudential Financial's principal operations consist of PGIM (its global investment management business), the U.S. Businesses (comprising the Retirement Strategies, Group Insurance, and Individual Life businesses), the International Businesses, the Closed Block division, and Corporate and Other operations [sec10k_PRU_387]. PGIM provides investment management services across public fixed income, public equity, real estate debt and equity, private credit and other alternatives, and multi-asset class strategies to institutional and retail clients globally, as well as the Company's general account [sec10k_PRU_2024-02-21_794]. The U.S. Businesses offer products covering protection, retirement, savings, income, and investment needs [sec10k_PRU_2024-02-21_794]. Effective in the first quarter of 2025, the International Businesses were consolidated into a single operating and reportable segment, whereas previously they consisted of the Life Planner and Gibraltar Life and Other operating segments [sec10k_PRU_387]. The Closed Block division is accounted for as a divested business reported separately from the Divested and Run-off Businesses included within Corporate and Other operations, which also includes corporate items and initiatives not allocated to business segments [sec10k_PRU_387].",
+      "citations": [
+        "sec10k_PRU_387",
+        "sec10k_PRU_2024-02-21_794"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All major claims in the answer are supported by the source text: Prudential Financial's principal operating segments are PGIM, U.S. Businesses, International Businesses, Closed Block division, and Corporate and Other operations; PGIM's services and investment types are described accurately; U.S. Businesses offerings are correctly paraphrased; the consolidation of International Businesses effective Q1 2025 is confirmed; and the Closed Block division's accounting treatment and Corporate and Other's composition are all verified in the source material."
     },
     {
       "question_id": "q023",
+      "question": "What New York statute did Chapter 427 of the Laws of 2025 amend regarding limitations on expenses for life insurance and annuity business?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Chapter 427 of the Laws of 2025 amended New York Insurance Law \u00a7 4228, which sets forth limitations on expenses for life insurance and annuity business [state_ny_000_2][state_ny_000_0]. Specifically, it amended \u00a7 4228(e)(2)(F) regarding compensation limit exemptions for salaried employees, and \u00a7 4228(c)(2)(D) and (F) regarding the calculation of total selling expenses [state_ny_000_2].",
+      "citations": [
+        "state_ny_000_2",
+        "state_ny_000_0"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The SOURCE TEXT explicitly confirms that Chapter 427 of the Laws of 2025 amended New York Insurance Law \u00a7 4228 regarding limitations on expenses for life insurance and annuity business, and specifically amended \u00a7 4228(e)(2)(F) regarding compensation limit exemptions for salaried employees and \u00a7 4228(c)(2)(D) and (F) regarding the calculation of total selling expenses, all of which are accurately stated in the ANSWER."
     },
     {
       "question_id": "q024",
+      "question": "According to NY DFS Insurance Circular Letter No. 4 (2025), what types of unexpected events does the disaster planning circular letter say authorized life insurance companies must be prepared to respond to?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "The circular letter states that disasters such as crippling storms, floods, terrorist attacks, cybersecurity breaches, and pandemics can happen unexpectedly, and that authorized life insurance companies must be prepared to respond at every level if such an event occurs [state_ny_002_2].",
+      "citations": [
+        "state_ny_002_2"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": false
+      "grounded": false,
+      "judge_reasoning": "The source text is from Insurance Circular Letter No. 2 (2026), not Circular Letter No. 4 (2025) as stated in the question, making the answer's citation to the wrong document a factual error."
     },
     {
       "question_id": "q025",
+      "question": "What did TDI's Commissioner's Bulletin B-0006-26 say Texas insurers should provide to policyholders regarding FEMA assistance after the July 2026 severe storms and flooding?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Under B-0006-26, TDI expects insurers handling flood loss inquiries and claims to inform policyholders about FEMA assistance, including providing FEMA contact information and a link to DisasterAssistance.gov [state_tx_000_4]. Insurers should also remind National Flood Insurance Program policyholders that losses typically must be reported to the flood insurer within 60 days, and inform policyholders about other potential disaster assistance programs such as U.S. Small Business Administration declared disaster loans [state_tx_000_4].",
+      "citations": [
+        "state_tx_000_4"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer\u2014that insurers should inform policyholders about FEMA assistance, provide FEMA contact information and DisasterAssistance.gov link, remind NFIP policyholders about the 60-day reporting requirement, and inform about SBA disaster loans\u2014are directly supported by the source text."
     },
     {
       "question_id": "q026",
+      "question": "According to TDI's bulletin on artificial intelligence, what must regulated entities using AI-supported decisions comply with?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "According to TDI's bulletin, decisions or actions impacting consumers that are made or supported by advanced analytical and computational technologies, including AI, must comply with all applicable insurance laws and regulations, including laws addressing unfair trade practices and unfair discrimination [state_tx_003_3]. TDI specifically expects compliance with Texas Insurance Code Chapter 541, concerning Unfair Methods of Competition and Unfair or [state_tx_003_3] deceptive practices. Additionally, when an entity uses AI to make a consequential decision, TDI expects a person to review and agree with all decisions before action is taken, and regulated entities should be able to furnish procedures and protections\u2014covering governance frameworks, risk management, data and privacy protections, and internal controls\u2014upon TDI's request [state_tx_003_6].",
+      "citations": [
+        "state_tx_003_3",
+        "state_tx_003_6"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer are directly supported by the source text: (1) decisions impacting consumers made or supported by AI must comply with applicable insurance laws including those addressing unfair trade practices and unfair discrimination is stated in chunk state_tx_003_3; (2) compliance with Texas Insurance Code Chapter 541 is specified in state_tx_003_3; (3) human review and agreement before action is taken for consequential AI decisions is stated in state_tx_003_6; and (4) the requirement to furnish procedures and protections covering governance frameworks, risk management, data and privacy protections, and internal controls is directly stated in state_tx_003_6."
     },
     {
       "question_id": "q027",
+      "question": "What does TDI's bulletin on House Bill 2516 provide for Texans who qualify for Medicare before age 65 due to ESRD or ALS?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "TDI's Bulletin B-0010-25, implementing House Bill 2516, creates new Medicare supplement enrollment and rating protections for Texans who become eligible for Medicare before age 65 due to end stage renal disease (ESRD) or amyotrophic lateral sclerosis (ALS) [state_tx_012_3]. Starting September 1, 2025, such individuals must be offered the same Medicare supplement coverage offered to those 65 and older, at the same rates for Plans A, B, and D, and at no more than 200% higher rates for all other plans, with no medical underwriting, waiting period, or preexisting condition limitation permitted [state_tx_012_3]. Carriers were urged to make necessary rate and form filings by August 1, 2025, to ensure compliance by the effective date, with rate filings needing to demonstrate compliance with Insurance Code \u00a7 1652.069 and forms updated to identify qualifying individuals and avoid preexisting condition exclusions [state_tx_012_3]. Additionally, between December 1, 2025, and June 1, 2026, individuals under 65 already enrolled in Medicare Part B due to ESRD or ALS as of June 20, 2025, will have an opportunity to enroll in a Medicare Supplement plan with HB 2516's protections [state_tx_012_4]. Carriers are not required to change rates for current insureds who do not submit a new application, though TDI encourages carriers to notify current enrollees of this enrollment opportunity [state_tx_012_4]. This aligns with the broader summary that Plans A, B, and D must be offered at the same premium as for those 65 or older, and other plans capped at 200% of that rate, effective June 20, 2025 [state_tx_010_16].",
+      "citations": [
+        "state_tx_012_3",
+        "state_tx_012_4",
+        "state_tx_010_16"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All specific facts in the answer are supported by the source text: TDI Bulletin B-0010-25 implements HB 2516 providing Medicare supplement protections for ESRD/ALS patients under 65; effective September 1, 2025; requires same rates for Plans A, B, D and no more than 200% for others; prohibits medical underwriting, waiting periods, and preexisting condition limitations; includes enrollment opportunity December 1, 2025-June 1, 2026 for those already on Medicare Part B; and carriers need not change rates for current insureds unless new application submitted."
     },
     {
       "question_id": "q028",
+      "question": "Under California's SB 495 amendment to Insurance Code section 2051.5, what does the bulletin clarify for insureds during a declared state of emergency?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "SB 495 amended Insurance Code section 2051.5 by adding subdivision (b)(3), effective January 1, 2026, to clarify the statutorily prescribed timeline for insureds to provide proof of loss to insurers during a declared state of emergency [state_ca_000_0]. Specifically, it extended the proof of loss deadline to a minimum of 100 days and required insurers to provide one or more additional three-month extensions for good cause if the insured, acting in good faith and with reasonable diligence, encounters a delay beyond their control [state_ca_000_2]. The bulletin also clarifies that the proof of loss deadline must be calculated from the date of loss, not from the date the state of emergency was declared, and reminds insurers that consumers must be given the full statutory period, including all extensions, to submit proof of loss [state_ca_000_2].",
+      "citations": [
+        "state_ca_000_0",
+        "state_ca_000_2"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer are directly supported by the source text: SB 495 amended Insurance Code section 2051.5 by adding subdivision (b)(3) effective January 1, 2026; it extended the proof of loss deadline to a minimum of 100 days; it required insurers to provide one or more additional three-month extensions for good cause when insureds acting in good faith with reasonable diligence encounter delays beyond their control; and the bulletin clarifies that the deadline must be calculated from the date of loss, not the declaration of emergency, and that consumers must receive the full statutory period including all extensions."
     },
     {
       "question_id": "q029",
+      "question": "According to California Bulletin 2026-2, what are property and casualty insurers subject to Proposition 103 prohibited from doing in their rate templates and exhibits?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "Bulletin 2026-2 states that insurers may not modify the California Department of Insurance's proprietary formulas contained in the Prior Approval Rate Application, the Prior Approval Rate Template, the Standard Exhibits Template, and the Standard SIS Exhibits Template [state_ca_003_0]. Any such unauthorized and undisclosed modification of formulas violates the Prior Approval Rate Filing Instructions, which require insurers to submit a Filing Memorandum disclosing any adjustments or modifications to the data and any additional explanation regarding included exhibits, as well as an Affidavit certifying compliance under penalty of perjury [state_ca_003_0].",
+      "citations": [
+        "state_ca_003_0"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately reflects the source text's statement that insurers may not modify the Department's proprietary formulas in the Application, Template, Exhibits, and SIS Exhibits, and that unauthorized modification violates the Prior Approval Rate Filing Instructions which require a Filing Memorandum disclosing adjustments/modifications and an Affidavit certifying compliance under penalty of perjury."
     },
     {
       "question_id": "q030",
+      "question": "Under California Insurance Code section 675.1(b)(1) as referenced in the Hughes Fire bulletin, how long is an insurer barred from cancelling or refusing to renew a residential property policy after a state of emergency declaration?",
       "category": "state_bulletin",
       "gold_answerable": true,
       "model_answerable": true,
+      "answer": "An insurer is barred from cancelling or refusing to renew a residential property insurance policy for properties in any ZIP Code within or adjacent to the fire perimeter for one year after the declaration of a state of emergency, based solely on the fact that the insured structure is located in an area where a wildfire occurred [state_ca_017_0].",
+      "citations": [
+        "state_ca_017_0"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": true
+      "grounded": true,
+      "judge_reasoning": "The answer accurately reflects the source text's direct quotation of California Insurance Code section 675.1(b)(1), correctly stating the one-year moratorium period, the ZIP Code requirement, and that the prohibition applies based solely on the wildfire occurrence."
     },
     {
       "question_id": "q031",
+      "question": "What is Northwestern Mutual's current risk-based capital (RBC) ratio?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The provided sources discuss RBC ratios for Globe Life, Genworth Financial, and Corebridge Financial, but none of them contain information about Northwestern Mutual's RBC ratio.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q032",
+      "question": "What does the Florida Office of Insurance Regulation's most recent bulletin say about hurricane claim deadlines?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The provided sources are all Texas Department of Insurance (TDI) bulletins concerning Hurricane Beryl claims handling, deductibles, underwriting, adjusters, and wind/flood losses. None of the sources are from the Florida Office of Insurance Regulation, so I cannot answer a question about Florida's most recent bulletin on hurricane claim deadlines.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q033",
+      "question": "What was MassMutual's total assets as of the most recent quarter?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The sources provided do not contain MassMutual's total assets figure for any recent quarter. They only mention MassMutual in the context of biographical information about board members and unrelated financial data from Genworth Financial and Voya Financial.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q034",
+      "question": "What is the NAIC model law number for regulating AI-based underwriting models?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The sources describe NAIC AI-related activities\u2014guiding principles adopted in 2020 and a model bulletin on AI use adopted in December 2023 [sec10k_LNC_2025-02-21_81][sec10k_LNC_86]\u2014but none of the provided sources give a specific NAIC model law number for regulating AI-based underwriting models.",
+      "citations": [
+        "sec10k_LNC_2025-02-21_81",
+        "sec10k_LNC_86"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q035",
+      "question": "What did Massachusetts Division of Insurance Bulletin 2026-04 state about long-term care rate increases?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The provided sources do not include Massachusetts Division of Insurance Bulletin 2026-04 or any content describing its contents. They only contain excerpts from SEC 10-K filings of Genworth Financial and Unum Group discussing long-term care rate increases generally, with no reference to this specific bulletin.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q036",
+      "question": "What was Prudential Financial's total revenue for the third quarter of 2026?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The sources provided are from 10-K annual filings and do not contain quarterly revenue figures for Q3 2026 for Prudential Financial.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q037",
+      "question": "According to the Washington state Office of the Insurance Commissioner, what are the licensing requirements for public adjusters?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The provided sources are excerpts from the NAIC Public Adjuster Licensing Model Act, not materials issued by the Washington state Office of the Insurance Commissioner. There is no source addressing Washington-specific licensing requirements, so I cannot answer this question from the given sources.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q038",
+      "question": "What is the minimum wage in the state of New York?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The sources reference New York's Minimum Wage Law (NYLL \u00a7 633 and 12 NYCRR \u00a7 142-2.1) in the context of litigation, but they do not state the actual minimum wage dollar amount in New York.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q039",
+      "question": "What does TDI's bulletin say about health insurance rate review for ACA marketplace plans in 2027?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
-      "citation_precision": null,
+      "answer": "The provided sources discuss TDI's 2026 health insurance rate filing bulletin (B-0006-25), which covers rate filings for 2026, not 2027 [state_tx_016_3][state_tx_016_4]. There is no source addressing ACA marketplace plan rate review for 2027.",
+      "citations": [
+        "state_tx_016_3",
+        "state_tx_016_4"
+      ],
+      "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q040",
+      "question": "What is Corebridge Financial's dividend per share declared for fiscal year 2025?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": true,
+      "answer": "For fiscal year 2025, Corebridge Financial declared quarterly cash dividends of $0.24 per common share on February 12, 2025 (paid March 31, 2025), May 5, 2025 (paid June 30, 2025), August 4, 2025 (paid September 30, 2025), and November 3, 2025 (paid December 31, 2025) [chunk_684]. Subsequently, on February 9, 2026, the Company declared a dividend of $0.25 per share for payment in March 2026, which relates to fiscal year 2026 [chunk_684].",
+      "citations": [
+        "sec10k_CRBG_684"
+      ],
       "citation_precision": 1.0,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q041",
+      "question": "Under the NAIC Long-Term Care Insurance Model Act, what are the minimum benefit trigger requirements?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The provided sources discuss NAIC activities related to reinsurance financing regulations, group capital calculations, guaranty association coverage limits, and long-term care rate increase review frameworks, but none of them describe the specific benefit trigger requirements (e.g., ADL or cognitive impairment standards) under the NAIC Long-Term Care Insurance Model Act. Additional sources covering the substantive provisions of that Model Act would be needed to answer this question.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
     },
     {
       "question_id": "q042",
+      "question": "What is the current federal excise tax rate on life insurance premiums paid to foreign insurers?",
       "category": "unanswerable",
       "gold_answerable": false,
       "model_answerable": false,
+      "answer": "The provided sources do not contain any information about the federal excise tax rate on life insurance premiums paid to foreign insurers. They consist of financial statement excerpts from various insurers' 10-K filings and do not address federal excise tax rates.",
+      "citations": [],
       "citation_precision": null,
       "parse_error": false,
-      "grounded": null
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q043",
+      "question": "Under the NAIC Annual Financial Reporting Model Regulation, what professional body must an 'Accountant' be in good standing with?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "The accountant must be a member in good standing with the American Institute of Certified Public Accountants (AICPA), as reflected in the required letter representation that the accountant is properly licensed by an appropriate state licensing authority and is a member in good standing in the AICPA [naic_205_25].",
+      "citations": [
+        "naic_205_25"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The source text explicitly states in section E that the accountant must provide 'a representation that the accountant is properly licensed by an appropriate state licensing authority and is a member in good standing in the AICPA,' which directly supports the answer's claim that the accountant must be a member in good standing with the AICPA."
+    },
+    {
+      "question_id": "q044",
+      "question": "Under the NAIC Variable Annuity Model Regulation, what must be true of a company's licensing before it may deliver or issue variable annuities in a state?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "A company must not deliver or issue for delivery variable annuities within a state unless it is licensed or organized to do a life insurance or annuity business in that state, and the commissioner must be satisfied that its condition or method of operation in connection with issuing these contracts will not render its operation hazardous to the public or its policyholders [naic_250_2]. In making this determination, the commissioner considers the company's history and financial condition, the character, responsibility and fitness of its officers and directors, and the law and regulation of its state of domicile under which it is authorized to issue variable annuities [naic_250_2]. A company that is a subsidiary of, or affiliated by common management or ownership with, an admitted life insurance company may be deemed to satisfy the officer/director fitness requirement if either it or the admitted company satisfies it, and companies licensed with a satisfactory record of doing business in the state for at least three years may also be deemed to have satisfied that requirement [naic_250_2]. Before delivering or issuing variable annuities, the company must also submit to the commissioner a general description of the kinds of variable annuities it intends to issue, and, if requested, a copy of the domiciliary state's statutes and regulations authorizing it to issue variable annuities and biographical data on its officers and directors using NAIC uniform forms [naic_250_2][naic_250_3].",
+      "citations": [
+        "naic_250_2",
+        "naic_250_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "All claims in the answer are directly supported by the source text: the licensing requirement, the commissioner's satisfaction regarding hazard, the three factors the commissioner must consider, the subsidiary/affiliation provisions, the three-year business record exception, and the submission requirements before delivering variable annuities are all accurately stated and properly cited to naic_250_2 and naic_250_3."
+    },
+    {
+      "question_id": "q045",
+      "question": "Under the NAIC Variable Contract Model Law, what must a contract providing benefits payable in variable amounts contain regarding the insurer's benefit-determination procedures?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Under the Model Variable Contract Law, a contract providing benefits payable in variable amounts must contain a statement of the essential features of the procedures the insurance company will follow in determining the dollar amount of the variable benefits [naic_260_4]. In addition, any such contract whose benefits vary to reflect investment experience \u2014 including a group contract and any certificate evidencing variable benefits issued under it \u2014 must state that the dollar amount will so vary, and must include on its first page a statement that the benefits are on a variable basis [naic_260_4].",
+      "citations": [
+        "naic_260_4"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer are directly supported by the source text: the requirement for a statement of essential features of procedures for determining variable benefit amounts, the requirement that contracts state benefits will vary based on investment experience, and the requirement for a first-page statement indicating benefits are on a variable basis are all present in the source material."
+    },
+    {
+      "question_id": "q046",
+      "question": "How does the NAIC Variable Life Insurance Model Regulation define 'variable death benefit'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Under the NAIC Variable Life Insurance Model Regulation, 'variable death benefit' means the amount of the death benefit, other than incidental insurance benefits, payable under a variable life insurance policy that is dependent on the investment performance of the separate account\u2014specifically, the amount the insurer would have to pay in the absence of any minimum death benefit [naic_270_4].",
+      "citations": [
+        "naic_270_4"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer accurately reflects the source text definition of 'variable death benefit' as the amount of death benefit other than incidental insurance benefits payable under a variable life insurance policy dependent on investment performance of the separate account, which the insurer would have to pay in the absence of any minimum death benefit."
+    },
+    {
+      "question_id": "q047",
+      "question": "Under the NAIC Model Regulation on Senior-Specific Certifications and Professional Designations, what makes the use of such a certification an unfair and deceptive act?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "It is an unfair and deceptive act for an insurance producer to use a senior-specific certification or professional designation that indicates or implies, in a way that misleads a purchaser or prospective purchaser, that the producer has special certification or training in advising or servicing seniors, in connection with the solicitation, sale, or purchase of a life insurance or annuity product, or in giving advice about such a product\u2014whether done directly or indirectly through publications, writings, analyses, or reports [naic_278_4]. This prohibited use includes, but is not limited to: using a certification or designation the producer has not actually earned or is ineligible to use; using a nonexistent or self-conferred certification or designation; using a certification or designation that indicates or implies a level of qualifications the producer does not actually have; or using a certification or designation from a certifying organization that is primarily engaged in sales/marketing instruction, lacks reasonable standards for assuring competency, lacks reasonable standards for monitoring and disciplining improper conduct, or lacks reasonable continuing education requirements [naic_278_5].",
+      "citations": [
+        "naic_278_4",
+        "naic_278_5"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer are directly supported by the source text: the definition of unfair and deceptive acts regarding senior-specific certifications, the application to life insurance and annuity products, the methods of use (direct and indirect through publications, writings, analyses, or reports), and all four prohibited uses listed (unearned certifications, nonexistent/self-conferred designations, misrepresented qualifications, and certifications from disqualified organizations lacking reasonable standards or continuing education requirements)."
+    },
+    {
+      "question_id": "q048",
+      "question": "Under the NAIC Corporate Governance Annual Disclosure Model Act, by what date each year must an insurer submit its Corporate Governance Annual Disclosure (CGAD) to the Commissioner?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "An insurer, or the insurance group of which it is a member, must submit its CGAD to the Commissioner no later than June 1 of each calendar year [naic_305_3][naic_306_3].",
+      "citations": [
+        "naic_305_3",
+        "naic_306_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer correctly states that an insurer must submit its CGAD to the Commissioner no later than June 1 of each calendar year, which is explicitly confirmed in both source texts (naic_305_3 and naic_306_3)."
+    },
+    {
+      "question_id": "q049",
+      "question": "Under the NAIC Life and Health Insurance Guaranty Association Model Act, what event triggers the Act's protection for a member insurer's policies?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "answer": "The provided sources discuss assessments, reinsurance assumption elections, and delegation provisions of the Life and Health Insurance Guaranty Association Model Act, but none of them state the specific triggering event (e.g., a member insurer being declared impaired or insolvent by a court order) that activates the Act's protections for policyholders. The sources reference impaired or insolvent insurers in the context of assessments [naic_520_62] and reinsurance elections tied to a liquidation order [naic_520_46], but do not explicitly define the triggering event for coverage protection itself.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q050",
+      "question": "Under the NAIC Military Sales Practices Model Regulation, does the regulation apply to the sale of credit insurance?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain the specific scope/applicability section of the Military Sales Practices Model Regulation that addresses whether credit insurance sales are excluded, so I cannot determine this from the given sources.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q051",
+      "question": "Under the NAIC Life Insurance Disclosure Model Regulation, what is a 'Buyer's Guide'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "answer": "The provided sources do not include the Life Insurance Disclosure Model Regulation's definition of 'Buyer's Guide.' The available source from that regulation only lists chronological amendment history, including the removal of the Buyer's Guide in 2018 [naic_580_15], but does not define the term. A definition of 'Buyer's Guide' is given for the separate Annuity Disclosure Model Regulation [naic_245_3], but that is a different model regulation and does not answer the question about the Life Insurance Disclosure Model Regulation specifically.",
+      "citations": [
+        "naic_580_15",
+        "naic_245_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q052",
+      "question": "How does the NAIC Universal Life Insurance Model Regulation define 'cash surrender value'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Under the NAIC Universal Life Insurance Model Regulation, \"cash surrender value\" is defined as the net cash surrender value plus any amounts outstanding as policy loans [naic_585_2]. Relatedly, the regulation defines \"net cash surrender value\" as the maximum amount payable to the policyowner upon surrender [naic_585_4].",
+      "citations": [
+        "naic_585_2",
+        "naic_585_4"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The ANSWER accurately states that 'cash surrender value' is defined as 'the net cash surrender value plus any amounts outstanding as policy loans' (source naic_585_2) and that 'net cash surrender value' means 'the maximum amount payable to the policyowner upon surrender' (source naic_585_4), both of which are directly supported by the source text."
+    },
+    {
+      "question_id": "q053",
+      "question": "According to the NAIC guidelines on Corporate Owned Life Insurance (COLI), who is generally the applicant, owner, premium payer, and beneficiary of a COLI policy?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "With COLI, the employer is generally the applicant, owner, premium payer, and beneficiary of the policy [naic_602_0].",
+      "citations": [
+        "naic_602_0"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer directly matches the source text, which explicitly states 'With COLI, the employer is generally the applicant, owner, premium payer and beneficiary of the policy.'"
+    },
+    {
+      "question_id": "q054",
+      "question": "Under the NAIC Accelerated Benefits Model Regulation, what must an insurer obtain from an assignee or irrevocable beneficiary before paying an accelerated benefit?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Before paying an accelerated benefit, the insurer must obtain a signed acknowledgement of concurrence for payout from any assignee or irrevocable beneficiary. However, if the insurer itself is the assignee under the policy, no such acknowledgement is required [naic_620_4].",
+      "citations": [
+        "naic_620_4"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer accurately paraphrases the source text, correctly stating that insurers must obtain a signed acknowledgement of concurrence for payout from assignees or irrevocable beneficiaries before paying accelerated benefits, with the exception that no acknowledgement is required if the insurer itself is the assignee."
+    },
+    {
+      "question_id": "q055",
+      "question": "Under the NAIC Insurance Information and Privacy Protection Model Act, what is one example of an 'adverse underwriting decision'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "answer": "The sources discuss disclosure obligations and exceptions related to adverse underwriting decisions (such as when specific privileged information need not be furnished, or when reasons may be given orally), but none of the provided sources actually define or give an example of what constitutes an 'adverse underwriting decision' itself (e.g., a denial, cancellation, or refusal to renew coverage).",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q056",
+      "question": "Under the NAIC Standards for Safeguarding Customer Information Model Regulation, what must each licensee implement?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Under the NAIC Standards for Safeguarding Customer Information Model Regulation, each licensee shall establish and implement an information security program, including appropriate policies and systems, pursuant to the regulation [naic_673_10].",
+      "citations": [
+        "naic_673_10"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer directly quotes and accurately paraphrases the SOURCE TEXT requirement that 'Each licensee shall establish and implement an information security program, including appropriate policies and systems pursuant to this regulation,' which is the exact language found in the cited source chunk."
+    },
+    {
+      "question_id": "q057",
+      "question": "Under the NAIC Viatical Settlements Model Act, how many activities of daily living must a person be unable to perform to be considered 'chronically ill'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "A person is considered 'chronically ill' if they are unable to perform at least two (2) activities of daily living, such as eating, toileting, transferring, bathing, dressing, or continence [naic_697_2].",
+      "citations": [
+        "naic_697_2"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer accurately states that a person is considered 'chronically ill' if unable to perform at least two activities of daily living, and correctly lists the examples (eating, toileting, transferring, bathing, dressing, continence) as they appear in the source text."
+    },
+    {
+      "question_id": "q058",
+      "question": "Under the NAIC Credit for Reinsurance Model Regulation, when must the commissioner allow credit for reinsurance ceded by a domestic insurer to an assuming insurer?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "The commissioner must allow credit for reinsurance ceded by a domestic insurer under several distinct scenarios: (1) when the assuming insurer was licensed in the state as of the date statutory financial statement credit is claimed [naic_786_4]; (2) when the assuming insurer is accredited as a reinsurer in the state as of that date, having filed a properly executed Form AR-1, evidence of licensure in at least one state, annual and audited financial statements, and maintaining at least $20,000,000 in policyholder surplus (or otherwise being approved by the commissioner as having adequate financial capacity) [naic_786_6]; (3) when the assuming insurer is domiciled in (or, for a U.S. branch of an alien insurer, entered through) a state employing substantially similar credit-for-reinsurance standards [naic_786_8]; (4) when the assuming insurer has been certified as a reinsurer in the state at all times for which credit is claimed, with the credit based on security held consistent with the reinsurer's assigned rating [naic_786_27]; and (5) when the assuming insurer does not meet the other requirements, but the reinsurance is required by applicable law or regulation of a jurisdiction where the reinsured risks are located [naic_786_60].",
+      "citations": [
+        "naic_786_4",
+        "naic_786_6",
+        "naic_786_8",
+        "naic_786_27",
+        "naic_786_60"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "All five scenarios described in the answer are directly supported by the source text: (1) naic_786_4 supports licensure requirement, (2) naic_786_6 supports accreditation with Form AR-1, financial statement, and $20,000,000 surplus requirements, (3) naic_786_8 supports domiciliation in state with substantially similar standards, (4) naic_786_27 supports certification with security based on assigned rating, and (5) naic_786_60 supports allowing credit when reinsurance is required by applicable law of jurisdiction where risks are located."
+    },
+    {
+      "question_id": "q059",
+      "question": "Under the NAIC Life and Health Reinsurance Agreements Model Regulation, which insurers does the regulation apply to?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain the applicability/scope provisions of the NAIC Life and Health Reinsurance Agreements Model Regulation itself. The retrieved sources instead cover the Insurer Receivership Model Act, Genworth's 10-K discussion of ORSA and AG 48, the Term and Universal Life Insurance Reserve Financing Model Regulation, the Credit for Reinsurance Model Regulation, and the Credit for Reinsurance Model Law\u2014none of which state which insurers the Life and Health Reinsurance Agreements Model Regulation applies to.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q060",
+      "question": "How does the NAIC Annuity Nonforfeiture Model Regulation define 'nonforfeiture rate'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Under the model regulation, 'nonforfeiture rate' means the interest rate used in determining the minimum nonforfeiture amount, which is determined at issue (called the initial nonforfeiture rate) and, if applicable, at each subsequent redetermination period (called the redetermination nonforfeiture rate) [naic_806_4].",
+      "citations": [
+        "naic_806_4"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The ANSWER accurately paraphrases the definition from the SOURCE TEXT, correctly identifying that 'nonforfeiture rate' is the interest rate used in determining the minimum nonforfeiture amount, with both initial and redetermination components as described in the source."
+    },
+    {
+      "question_id": "q061",
+      "question": "Under the NAIC Actuarial Opinion and Memorandum Regulation, what does an 'Actuarial Opinion' address?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "The statement of actuarial opinion under this regulation applies to all in-force business on the statement date, whether directly issued or assumed, regardless of when or where issued, covering reserves such as those in Exhibits 8, 9 and 10, and claim liabilities in Exhibit 11, Part 1, as well as equivalent items in the separate account statement or statements [naic_822_8]. If, based on asset adequacy analysis, the appointed actuary determines that an additional reserve is needed beyond the aggregate reserve calculated under the Standard Valuation Law, the company must establish that additional reserve, and any later release of such reserves must be disclosed in the actuarial opinion for that year [naic_822_8]. If the appointed actuary cannot form an opinion, they must refuse to issue a statement of actuarial opinion, and if the opinion is adverse or qualified, the actuary must explicitly state the reasons, placing this statement between the scope paragraph and the opinion paragraph [naic_822_20].",
+      "citations": [
+        "naic_822_8",
+        "naic_822_20"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the answer are directly supported by the source text: the statement of actuarial opinion applies to all in-force business regardless of when or where issued (naic_822_8), covers reserves in Exhibits 8, 9, 10 and claim liabilities in Exhibit 11, Part 1 (naic_822_8), requires establishment of additional reserves when determined necessary by asset adequacy analysis (naic_822_8), requires disclosure of reserve releases in the actuarial opinion (naic_822_8), and requires actuaries unable to form an opinion to refuse issuance and those with adverse or qualified opinions to state reasons between scope and opinion paragraphs (naic_822_20)."
+    },
+    {
+      "question_id": "q062",
+      "question": "Under the NAIC Unfair Claims Settlement Practices Act, under what two conditions does committing a prohibited act become an 'improper claims practice'?",
+      "category": "naic_model_law",
+      "gold_answerable": true,
+      "model_answerable": false,
+      "answer": "The sources indicate that the listed acts constitute an unfair claims practice only 'if committed in violation of Section 3' [naic_900_5], but the actual text of Section 3, which would specify the two conditions (e.g., frequency and knowing/reckless commission) under which such acts become an 'improper claims practice,' is not included in the provided sources.",
+      "citations": [
+        "naic_900_5"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q063",
+      "question": "When was NY DFS Insurance Circular Letter No. 2 (2026) on disaster planning for the life and health insurance industries issued?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "NY DFS Insurance Circular Letter No. 2 (2026) on disaster planning for the life and health insurance industries was issued on May 20, 2026 [state_ny_002_2].",
+      "citations": [
+        "state_ny_002_2"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The SOURCE TEXT explicitly states 'Insurance Circular Letter No. 2 (2026) May 20, 2026' confirming that NY DFS Insurance Circular Letter No. 2 (2026) on disaster planning for the life and health insurance industries was issued on May 20, 2026."
+    },
+    {
+      "question_id": "q064",
+      "question": "Under New York regulation 11 NYCRR \u00a7 52.16(c)(8), may a disability income insurance policy reduce benefits based on an estimate of what an insured may receive under workers' compensation, rather than what has actually been paid?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "No. Under 11 NYCRR \u00a7 52.16(c)(8), benefits may only be reduced by amounts an insured has actually received under workers' compensation (or other government programs), not by estimates of what the insured may be eligible for or may receive [state_ny_008_2]. Mandatory offset provisions based on such estimates are not permitted, a position articulated in OGC Opinion 06-12-09 and reaffirmed by the Department [state_ny_008_2][state_ny_008_3]. The Department reiterates that it will not approve policy provisions limiting or excluding benefits based on estimated government benefits [state_ny_008_6]. However, insurers may include an optional offset provision for estimated government benefits at the insured's request, provided the insured can opt out at any time, and if the claim is denied or the insured chooses not to apply, the insurer must still pay the appropriate benefits [state_ny_008_3].",
+      "citations": [
+        "state_ny_008_2",
+        "state_ny_008_3",
+        "state_ny_008_6"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "All factual claims in the ANSWER are directly supported by the SOURCE TEXT: the regulation permits reductions only by benefits 'actually received' (not estimates), mandatory offset provisions based on estimates are prohibited per OGC Opinion 06-12-09, optional offset provisions for estimated benefits are permissible at the insured's request with opt-out rights, and the Department will not approve provisions limiting benefits based on estimated government benefits."
+    },
+    {
+      "question_id": "q065",
+      "question": "What was California's total aggregate Principle-Based Reserving assessment for long-term care insurers for Fiscal Year 2025-26?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "California's total aggregate Principle-Based Reserving assessment for long-term care insurers for FY 2025-26 was $1,329,000 [state_ca_001_0].",
+      "citations": [
+        "state_ca_001_0"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The source text explicitly states that 'The California Department of Insurance (CDI) has adopted an aggregate annual assessment for Fiscal Year (FY) 2025-26 of $1,329,000,' which directly supports the answer's factual claim."
+    },
+    {
+      "question_id": "q066",
+      "question": "Under California Insurance Code section 10489.992(b)(1), what was the total aggregate Principle-Based Reserving assessment for life insurers for Fiscal Year 2025-26?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "The CDI established an aggregate annual PBR assessment for life insurers for FY 2025-26 of $3,078,000 [state_ca_002_0].",
+      "citations": [
+        "state_ca_002_0"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The answer correctly states that the CDI established an aggregate annual PBR assessment for life insurers for FY 2025-26 of $3,078,000, which is directly supported by the source text that states 'the California Department of Insurance (CDI) has established an aggregate annual assessment for Fiscal Year (FY) 2025-26 of $3,078,000.'"
+    },
+    {
+      "question_id": "q067",
+      "question": "What was California's aggregate Principle-Based Reserving assessment for long-term care insurers for Fiscal Year 2024-25?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "California's aggregate Principle-Based Reserving assessment for long-term care insurers for Fiscal Year 2024-25 was $1,433,000 [state_ca_013_0].",
+      "citations": [
+        "state_ca_013_0"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The source text explicitly states that 'The California Department of Insurance (CDI) has adopted an aggregate annual assessment for Fiscal Year (FY) 2024-25 of $1,433,000,' which directly supports the answer's claim about the aggregate Principle-Based Reserving assessment amount for that fiscal year."
+    },
+    {
+      "question_id": "q068",
+      "question": "According to TDI Commissioner's Bulletin B-0005-26, what was the overall private passenger automobile rate increase approved for the Texas Automobile Insurance Plan Association, effective November 1, 2026?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "TDI approved an overall private passenger automobile rate increase of 2.8% for the Texas Automobile Insurance Plan Association (TAIPA), effective November 1, 2026, per Commissioner's Order No. 2026-9983 [state_tx_001_3].",
+      "citations": [
+        "state_tx_001_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The SOURCE TEXT explicitly states that 'The Texas Department of Insurance has approved changes in the rates for private passenger and commercial automobile insurance for the Texas Automobile Insurance Plan Association (TAIPA)' effective November 1, 2026, by Commissioner's Order No. 2026-9983, with 'an overall increase of 2.8% for private passenger automobile,' which exactly matches the ANSWER's claims."
+    },
+    {
+      "question_id": "q069",
+      "question": "Under TDI's calendar year 2025 disallowed expenses data call, by what date must the completed form and affidavit be submitted?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "The completed form and affidavit for TDI's calendar year 2025 disallowed expenses data call must be submitted no later than July 24, 2026 [state_tx_002_3].",
+      "citations": [
+        "state_tx_002_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The SOURCE TEXT explicitly states 'Complete the form and return this data in accordance with the general instructions no later than July 24, 2026,' which directly supports the ANSWER's claim that the submission deadline is July 24, 2026."
+    },
+    {
+      "question_id": "q070",
+      "question": "Under what Texas Insurance Code section is TDI's 2025 property direct written premium data call for the Texas catastrophe area authorized?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "TDI's 2025 property direct written premium data call for the Texas catastrophe area is authorized by Insurance Code Section 2210.052 [state_tx_004_3].",
+      "citations": [
+        "state_tx_004_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The source text explicitly states 'The Texas Department of Insurance issues the attached special data call, authorized by Insurance Code Section 2210.052,' which directly supports the answer's claim about the authorization for TDI's 2025 property direct written premium data call for the Texas catastrophe area."
+    },
+    {
+      "question_id": "q071",
+      "question": "Under TDI's 2025 call for annual experience and workers' compensation deductible plans, how long must respondents retain underlying source documents after submission?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Respondents must keep the underlying data, individual source documents, and other information used to develop their response until at least February 6, 2027, given the submission deadline of February 6, 2026 [state_tx_006_3].",
+      "citations": [
+        "state_tx_006_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": true,
+      "judge_reasoning": "The source text explicitly states 'Respondents must keep underlying data, individual source documents, and other information used to develop the response until at least February 6, 2027' with a submission deadline of February 6, 2026, which matches all factual claims in the answer."
+    },
+    {
+      "question_id": "q072",
+      "question": "Under Texas House Bill 2067, which lines of insurance are covered in TDI's Phase 1 implementation of declination/cancellation/nonrenewal reporting requirements?",
+      "category": "state_bulletin",
+      "gold_answerable": true,
+      "model_answerable": true,
+      "answer": "Phase 1 covers residential property insurance and private passenger automobile insurance, with TDI proposing revisions to the Texas Statistical Plan for Residential Risks and the Texas Private Passenger Auto Statistical Plan to provide reporting instructions for these lines. TDI also plans to issue separate guidance on complying with the reporting requirements for workers' compensation insurance policies during this phase [state_tx_014_3].",
+      "citations": [
+        "state_tx_014_3"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": false,
+      "judge_reasoning": "The answer states that TDI 'plans to issue separate guidance on complying with the reporting requirements for workers' compensation insurance policies during this phase,' but the source text states TDI 'plans to issue guidance on complying with the reporting requirements for workers' compensation insurance policies' without specifying it as 'separate guidance' or explicitly confirming workers' comp is covered in Phase 1 implementation rather than being addressed as additional guidance alongside the two main lines."
+    },
+    {
+      "question_id": "q073",
+      "question": "What is New York Life Insurance Company's total surplus as of its most recent statutory filing?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources discuss statutory surplus and dividend rules for Corebridge Financial subsidiaries (AGL, VALIC, USL) and MetLife's subsidiary MLIC, but none contain information about New York Life Insurance Company's total surplus.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q074",
+      "question": "What is Guardian Life Insurance Company of America's current financial strength rating from A.M. Best?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain any information about Guardian Life Insurance Company of America's A.M. Best rating; they cover Globe Life, Prudential, Principal Financial, Genworth, and Voya subsidiaries instead.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q075",
+      "question": "What does the Illinois Department of Insurance's most recent bulletin say about crop insurance requirements?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not include any Illinois Department of Insurance bulletin on crop insurance requirements. The available sources cover NAIC model act/regulation provisions referencing Federal Crop Insurance Corporation premium exclusions and California Department of Insurance bulletins on residential property moratoriums, none of which address Illinois or crop insurance requirements specifically.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q076",
+      "question": "According to the Pennsylvania Insurance Department, what are the continuing education requirements for insurance producers?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources are NAIC model acts and regulations (Producer Licensing Model Act, Reinsurance Intermediary Model Act, Suitability in Annuity Transactions Model Regulation, Viatical Settlements Model Regulation), not Pennsylvania Insurance Department materials. None of these sources describe Pennsylvania-specific continuing education requirements for insurance producers, so I cannot answer this question.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q077",
+      "question": "What was MetLife's net income for the second quarter of 2026?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The sources only provide annual net income figures for MetLife for fiscal years 2023, 2024, and 2025 from 10-K filings; they do not contain quarterly data for Q2 2026.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q078",
+      "question": "What was Lincoln National Corporation's total revenue reported in its most recent Form 10-Q?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain Lincoln National Corporation's total revenue figures from any Form 10-Q. They only include references to exhibits, incorporation by reference notes, and unrelated reinsurance disclosures from Voya Financial's 10-K filings.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q079",
+      "question": "Under the NAIC Medicare Supplement Insurance Minimum Standards Model Act, what is the minimum loss ratio insurers must maintain?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain the NAIC Medicare Supplement Insurance Minimum Standards Model Act or any information about minimum loss ratio requirements for Medicare supplement insurance. The sources cover unrelated topics such as Credit for Reinsurance, RBC Model Act, and Variable Life Insurance regulations.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q080",
+      "question": "What does NAIC's 2027 model bulletin on quantum-computing risk in insurance underwriting require of insurers?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources discuss NAIC's December 2023 model bulletin on Use of Artificial Intelligence Systems by Insurers, but there is no mention of a 2027 model bulletin on quantum-computing risk in insurance underwriting. I cannot answer this question based on the available sources.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q081",
+      "question": "What is the current federal funds interest rate set by the Federal Reserve?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": true,
+      "answer": "According to the most recent filing, during 2025 the Federal Reserve lowered the federal funds rate target range by 75 basis points to a range of 3.50% to 3.75%, and at its January 2026 meeting the Federal Reserve decided to maintain that target range [sec10k_LNC_177]. This is consistent with Genworth's filing noting the Federal Reserve held rates constant at its January 2026 meeting [sec10k_GNW_137].",
+      "citations": [
+        "sec10k_LNC_177",
+        "sec10k_GNW_137"
+      ],
+      "citation_precision": 1.0,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q082",
+      "question": "What percentage of MetLife's individual life insurance policyholders filed a claim in 2025?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not include data on the percentage of MetLife's individual life insurance policyholders who filed a claim in 2025. The sources discuss claims development, IBNR liabilities, reinsurance schedules, and closed block information, but do not provide a policyholder claim filing rate.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q083",
+      "question": "What did the Ohio Department of Insurance report about its 2026 examination of MassMutual?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain any information about an Ohio Department of Insurance examination of MassMutual in 2026. The sources mention MassMutual only in the context of a board member's prior career there, with no reference to an Ohio Department of Insurance examination.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
+    },
+    {
+      "question_id": "q084",
+      "question": "Under IRC Section 7702, what is the federal definition of a life insurance contract for tax purposes?",
+      "category": "unanswerable",
+      "gold_answerable": false,
+      "model_answerable": false,
+      "answer": "The provided sources do not contain the text or details of IRC Section 7702's definition of a life insurance contract for federal tax purposes. They reference IRC provisions like Sections 401(a), 403(b), 408(k), 457, and 414 in other contexts, and one source (Standard Valuation Law) defines 'life insurance' for NAIC valuation purposes rather than under IRC Section 7702, but none address the specific federal tax definition requested.",
+      "citations": [],
+      "citation_precision": null,
+      "parse_error": false,
+      "grounded": null,
+      "judge_reasoning": null
     }
   ]
 }

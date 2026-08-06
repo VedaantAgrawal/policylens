@@ -74,4 +74,4 @@ def test_missing_chunks_file_skips_corpus_check(tmp_path):
 def test_real_golden_set_is_valid():
     """The committed golden set must always pass its own validation."""
     result = load_golden_set()
-    assert len(result) >= 42
+    assert len(result) >= 84
