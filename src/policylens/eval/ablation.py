@@ -66,11 +66,30 @@ def render_generation_table() -> str:
     return "\n".join(rows)
 
 
+def render_deltas_table() -> str | None:
+    result = _load(EVAL_RESULTS_DIR / "stage_deltas.json")
+    if result is None:
+        return None
+    rows = ["| Stage pair | " + " | ".join(RETRIEVAL_METRICS) + " |", "|---|" + "---|" * len(RETRIEVAL_METRICS)]
+    for pair, metrics in result.items():
+        cells = []
+        for metric in RETRIEVAL_METRICS:
+            stats = metrics[metric]
+            mark = "**" if stats["significant"] else ""
+            cells.append(f"{mark}{stats['delta']:+.3f} [{stats['ci_lower']:+.3f}, {stats['ci_upper']:+.3f}]{mark}")
+        rows.append(f"| {pair} | " + " | ".join(cells) + " |")
+    return "\n".join(rows)
+
+
 def main() -> None:
     print("## Retrieval ablation (95% bootstrap CI)\n")
     print(render_retrieval_table())
     print("\n## Generation quality (95% bootstrap CI)\n")
     print(render_generation_table())
+    deltas_table = render_deltas_table()
+    if deltas_table:
+        print("\n## Paired bootstrap stage deltas (95% CI; bold = statistically significant)\n")
+        print(deltas_table)
 
 
 if __name__ == "__main__":

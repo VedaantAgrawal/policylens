@@ -52,17 +52,22 @@ def run_generation_eval(
 
         record = {
             "question_id": q.question_id,
+            "question": q.question,
             "category": q.category,
             "gold_answerable": q.answerable,
             "model_answerable": result.answerable,
+            "answer": result.answer,
+            "citations": result.citations,
             "citation_precision": result.citation_precision,
             "parse_error": result.parse_error,
             "grounded": None,
+            "judge_reasoning": None,
         }
 
         if q.answerable and result.answerable and result.citations and not result.parse_error:
             verdict = judge_groundedness(judge_provider, q.question, result, chunks_by_id)
             record["grounded"] = verdict.grounded
+            record["judge_reasoning"] = verdict.reasoning
 
         per_query.append(record)
 
