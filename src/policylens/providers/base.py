@@ -28,7 +28,17 @@ class CompletionResult:
 
 class ModelProvider(Protocol):
     name: str
+    model: str
 
     def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> CompletionResult:
         """Return the model's response to a single-turn request, with usage + timing."""
+        ...
+
+    @property
+    def client(self):
+        """Raw underlying SDK client — an escape hatch for callers (the agent
+        loop) that need tool use or multi-turn conversations `complete()` can't
+        express. Both AnthropicProvider and BedrockProvider expose the same
+        messages.create/tool_runner surface here, so agent code never branches
+        on which provider it's holding."""
         ...

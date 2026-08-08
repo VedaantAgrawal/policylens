@@ -24,6 +24,18 @@ class BedrockProvider:
         self._client = AnthropicBedrockMantle(aws_region=aws_region)
         self._model = model
 
+    @property
+    def client(self) -> AnthropicBedrockMantle:
+        """Raw SDK client — same escape hatch as AnthropicProvider.client, for
+        the agent loop's tool-use needs. AnthropicBedrockMantle exposes the same
+        messages.create/tool_runner surface, so agent code doesn't need to
+        branch on provider."""
+        return self._client
+
+    @property
+    def model(self) -> str:
+        return self._model
+
     def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> CompletionResult:
         start = time.monotonic()
         response = self._client.messages.create(

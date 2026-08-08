@@ -29,6 +29,18 @@ class AnthropicProvider:
         self._client = anthropic.Anthropic()
         self._model = model
 
+    @property
+    def client(self) -> anthropic.Anthropic:
+        """Raw SDK client — for callers (the agent loop) that need tool use or
+        multi-turn conversations `complete()`'s single-turn interface can't express.
+        Keeping this a deliberate escape hatch, not the default access path, is
+        what keeps `complete()` swappable between Anthropic and Bedrock."""
+        return self._client
+
+    @property
+    def model(self) -> str:
+        return self._model
+
     def complete(self, *, system: str, user_message: str, max_tokens: int = 1024) -> CompletionResult:
         kwargs = {}
         if self._model in _SUPPORTS_EFFORT_CONTROL:

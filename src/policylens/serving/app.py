@@ -15,9 +15,12 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from policylens.agent.loop import run_agent
+from policylens.agent.tools import CorpusTools
 from policylens.eval.pricing import estimate_cost_usd
 from policylens.generation.generate import generate_answer
 from policylens.providers.anthropic_provider import AnthropicProvider, DEFAULT_MODEL
+from policylens.retrieval.bm25 import Bm25Retriever
 from policylens.retrieval.hybrid import HybridRetriever
 
 app = FastAPI(title="PolicyLens API", description="Agentic RAG over insurance and regulatory documents")
@@ -44,8 +47,14 @@ CHUNKS_PATH = Path("data/processed/chunks.jsonl")
 EVAL_RESULTS_DIR = Path("eval_results")
 RETRIEVAL_K = 5
 
-_retriever = HybridRetriever()
+_bm25 = Bm25Retriever()
+_retriever = HybridRetriever(bm25=_bm25)
 _generation_provider = AnthropicProvider()
+_extraction_provider = AnthropicProvider(model="claude-haiku-4-5")
+# Shares _bm25/_retriever with /query above rather than re-loading BM25 and the
+# dense embedding model a second time — DenseRetriever alone costs real startup
+# time and memory, not worth paying twice for the same corpus.
+_corpus_tools = CorpusTools(bm25=_bm25, hybrid=_retriever)
 
 _chunks_by_id: dict[str, dict] = {}
 with CHUNKS_PATH.open() as f:
@@ -104,6 +113,22 @@ def query(request: QueryRequest) -> QueryResponse:
         retrieved_chunk_ids=retrieved_ids,
         cost_usd=cost_usd,
     )
+
+
+class AgentQueryResponse(BaseModel):
+    answer: str
+    trace: list[dict]
+    tool_call_count: int
+
+
+@app.post("/agent/query", response_model=AgentQueryResponse)
+def agent_query(request: QueryRequest) -> AgentQueryResponse:
+    """Multi-step agent: plans tool calls (search_corpus, fetch_section,
+    compare_provisions, extract_numeric_field) rather than single-shot
+    retrieve-then-generate like /query. Returns the full structured trace of
+    what it did, not just the final answer — see agent/loop.py."""
+    result = run_agent(request.question, _generation_provider, _extraction_provider, _corpus_tools)
+    return AgentQueryResponse(answer=result.answer, trace=result.trace, tool_call_count=result.tool_call_count)
 
 
 @app.get("/eval")

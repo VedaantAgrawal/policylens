@@ -1,66 +1,82 @@
-"""MCP server exposing PolicyLens retrieval as a tool.
+"""MCP server exposing PolicyLens's 4 corpus tools plus the full agent loop.
 
-Scope note: the full design called for search_corpus, fetch_section,
-compare_provisions, and extract_numeric_field, with a planning agent loop on
-top. Under a 3-day timeline, only search_corpus is implemented — a thin,
-real wrapper over the same HybridRetriever the FastAPI /query endpoint uses,
-not a stub that returns fake data. This makes the cut concrete: run it with
+All 4 originally-scoped tools (search_corpus, fetch_section,
+compare_provisions, extract_numeric_field) are real implementations backed
+by CorpusTools — the same code the FastAPI /agent/query endpoint and the
+in-process agent loop use, not a separate reimplementation. Run it with
 `uv run mcp dev src/policylens/agent/mcp_server.py`, or point a Claude
 Desktop / Claude Code MCP config at `uv run python -m policylens.agent.mcp_server`.
 """
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
 from mcp.server.mcpserver import MCPServer
 
-from policylens.retrieval.hybrid import HybridRetriever
-
-CHUNKS_PATH = Path("data/processed/chunks.jsonl")
+from policylens.agent.tools import CorpusTools
+from policylens.providers.anthropic_provider import AnthropicProvider
 
 server = MCPServer(
     name="policylens",
-    instructions="Search PolicyLens's corpus of SEC 10-Ks, NAIC model laws, and state "
-    "insurance department bulletins for passages relevant to a query.",
+    instructions="Search and read PolicyLens's corpus of SEC 10-Ks, NAIC model laws, "
+    "and state insurance department bulletins. Start with search_corpus to find "
+    "candidate documents, then fetch_section to read a specific section in full, "
+    "compare_provisions to compare how several documents treat the same topic, or "
+    "extract_numeric_field to pull one specific number out of a document.",
 )
 
-_retriever: HybridRetriever | None = None
-_chunks_by_id: dict[str, dict] = {}
+_tools: CorpusTools | None = None
+_extraction_provider: AnthropicProvider | None = None
 
 
 def _ensure_loaded() -> None:
-    global _retriever
-    if _retriever is not None:
+    global _tools, _extraction_provider
+    if _tools is not None:
         return
-    _retriever = HybridRetriever()
-    with CHUNKS_PATH.open() as f:
-        for line in f:
-            chunk = json.loads(line)
-            _chunks_by_id[chunk["chunk_id"]] = chunk
+    _tools = CorpusTools()
+    _extraction_provider = AnthropicProvider(model="claude-haiku-4-5")
 
 
 @server.tool()
 def search_corpus(query: str, k: int = 5) -> list[dict]:
-    """Search the insurance/regulatory corpus and return the top-k matching chunks.
+    """Search the whole insurance/regulatory corpus and return the top-k matching chunks.
 
-    Each result includes the chunk_id (needed to cite it), title, section
+    Each result includes the chunk_id (needed to cite it), doc_id, title, section
     heading, and the chunk text itself.
     """
     _ensure_loaded()
-    assert _retriever is not None
-    chunk_ids = _retriever.search(query, k=k)
-    return [
-        {
-            "chunk_id": cid,
-            "title": _chunks_by_id[cid]["title"],
-            "section_heading": _chunks_by_id[cid].get("section_heading"),
-            "text": _chunks_by_id[cid]["text"],
-        }
-        for cid in chunk_ids
-        if cid in _chunks_by_id
-    ]
+    assert _tools is not None
+    return _tools.search_corpus(query, k=k)
+
+
+@server.tool()
+def fetch_section(doc_id: str, section_heading: str | None = None, page: int | None = None) -> list[dict]:
+    """Fetch a specific section (by heading substring) or page from a document already
+    identified by search_corpus, to read its full surrounding context.
+    """
+    _ensure_loaded()
+    assert _tools is not None
+    return _tools.fetch_section(doc_id, section_heading=section_heading, page=page)
+
+
+@server.tool()
+def compare_provisions(doc_ids: list[str], aspect: str, k_per_doc: int = 3) -> dict[str, list[dict]]:
+    """Retrieve the passages most relevant to a topic from each of several documents,
+    for comparing how they each treat the same point.
+    """
+    _ensure_loaded()
+    assert _tools is not None
+    return _tools.compare_provisions(doc_ids, aspect, k_per_doc=k_per_doc)
+
+
+@server.tool()
+def extract_numeric_field(doc_id: str, field_description: str) -> dict:
+    """Extract one specific numeric fact (a dollar amount, day count, percentage, or
+    date) from a single document, with its source chunk_id.
+    """
+    _ensure_loaded()
+    assert _tools is not None
+    assert _extraction_provider is not None
+    return _tools.extract_numeric_field(_extraction_provider, doc_id, field_description)
 
 
 if __name__ == "__main__":
