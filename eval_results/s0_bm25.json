@@ -1,28 +1,28 @@
 {
   "retriever": "s0_bm25",
-  "scored_at": "2026-08-04T21:26:55.197683+00:00",
-  "num_answerable_questions": 30,
-  "num_unanswerable_questions": 12,
+  "scored_at": "2026-08-05T23:42:43.894106+00:00",
+  "num_answerable_questions": 60,
+  "num_unanswerable_questions": 24,
   "aggregate": {
     "recall_at_5": {
-      "mean": 0.6,
-      "ci_lower": 0.43333333333333335,
-      "ci_upper": 0.7666666666666667
+      "mean": 0.6166666666666667,
+      "ci_lower": 0.5,
+      "ci_upper": 0.7333333333333333
     },
     "recall_at_10": {
-      "mean": 0.7666666666666667,
-      "ci_lower": 0.6,
-      "ci_upper": 0.9
+      "mean": 0.7,
+      "ci_lower": 0.5833333333333334,
+      "ci_upper": 0.8166666666666667
     },
     "mrr": {
-      "mean": 0.4654100529100529,
-      "ci_lower": 0.3189120370370371,
-      "ci_upper": 0.610648148148148
+      "mean": 0.4673809523809524,
+      "ci_lower": 0.3582137896825397,
+      "ci_upper": 0.5780977182539685
     },
     "ndcg_at_10": {
-      "mean": 0.5345452980502167,
-      "ci_lower": 0.39758786373103794,
-      "ci_upper": 0.6681811327368425
+      "mean": 0.5208402787351509,
+      "ci_lower": 0.41617108780303685,
+      "ci_upper": 0.6253633303907278
     }
   },
   "per_query": [
@@ -53,10 +53,10 @@
     {
       "question_id": "q004",
       "category": "naic_model_law",
-      "recall_at_5": 1.0,
+      "recall_at_5": 0.0,
       "recall_at_10": 1.0,
-      "mrr": 0.25,
-      "ndcg_at_10": 0.43067655807339306
+      "mrr": 0.14285714285714285,
+      "ndcg_at_10": 0.3333333333333333
     },
     {
       "question_id": "q005",
@@ -79,48 +79,48 @@
       "category": "naic_model_law",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
-      "mrr": 0.3333333333333333,
-      "ndcg_at_10": 0.5
+      "mrr": 0.2,
+      "ndcg_at_10": 0.38685280723454163
     },
     {
       "question_id": "q008",
       "category": "naic_model_law",
       "recall_at_5": 0.0,
-      "recall_at_10": 1.0,
-      "mrr": 0.16666666666666666,
-      "ndcg_at_10": 0.3562071871080222
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
     },
     {
       "question_id": "q009",
       "category": "naic_model_law",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
-      "mrr": 0.5,
-      "ndcg_at_10": 0.6309297535714575
+      "mrr": 0.25,
+      "ndcg_at_10": 0.43067655807339306
     },
     {
       "question_id": "q010",
       "category": "naic_model_law",
       "recall_at_5": 0.0,
       "recall_at_10": 1.0,
-      "mrr": 0.1111111111111111,
-      "ndcg_at_10": 0.3010299956639812
+      "mrr": 0.125,
+      "ndcg_at_10": 0.31546487678572877
     },
     {
       "question_id": "q011",
       "category": "naic_model_law",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
-      "mrr": 0.5,
-      "ndcg_at_10": 0.6309297535714575
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5
     },
     {
       "question_id": "q012",
       "category": "naic_model_law",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
-      "mrr": 0.3333333333333333,
-      "ndcg_at_10": 0.5
+      "mrr": 0.2,
+      "ndcg_at_10": 0.38685280723454163
     },
     {
       "question_id": "q013",
@@ -142,9 +142,9 @@
       "question_id": "q015",
       "category": "naic_model_law",
       "recall_at_5": 0.0,
-      "recall_at_10": 1.0,
-      "mrr": 0.125,
-      "ndcg_at_10": 0.31546487678572877
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
     },
     {
       "question_id": "q016",
@@ -158,9 +158,9 @@
       "question_id": "q017",
       "category": "sec_10k",
       "recall_at_5": 0.0,
-      "recall_at_10": 1.0,
-      "mrr": 0.14285714285714285,
-      "ndcg_at_10": 0.3333333333333333
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
     },
     {
       "question_id": "q018",
@@ -175,8 +175,8 @@
       "category": "sec_10k",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
-      "mrr": 1.0,
-      "ndcg_at_10": 1.0
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5
     },
     {
       "question_id": "q020",
@@ -224,7 +224,7 @@
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
       "mrr": 1.0,
-      "ndcg_at_10": 0.9197207891481876
+      "ndcg_at_10": 0.8772153153380493
     },
     {
       "question_id": "q026",
@@ -255,16 +255,256 @@
       "category": "state_bulletin",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
-      "mrr": 1.0,
-      "ndcg_at_10": 1.0
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
     },
     {
       "question_id": "q030",
       "category": "state_bulletin",
       "recall_at_5": 1.0,
       "recall_at_10": 1.0,
+      "mrr": 0.2,
+      "ndcg_at_10": 0.38685280723454163
+    },
+    {
+      "question_id": "q043",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
       "mrr": 0.3333333333333333,
       "ndcg_at_10": 0.5
+    },
+    {
+      "question_id": "q044",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q045",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q046",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.1,
+      "ndcg_at_10": 0.2890648263178879
+    },
+    {
+      "question_id": "q047",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q048",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q049",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5
+    },
+    {
+      "question_id": "q050",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q051",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q052",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q053",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q054",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q055",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q056",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q057",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q058",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.125,
+      "ndcg_at_10": 0.31546487678572877
+    },
+    {
+      "question_id": "q059",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q060",
+      "category": "naic_model_law",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.2,
+      "ndcg_at_10": 0.38685280723454163
+    },
+    {
+      "question_id": "q061",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q062",
+      "category": "naic_model_law",
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    {
+      "question_id": "q063",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q064",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q065",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q066",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q067",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q068",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q069",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q070",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.6309297535714575
+    },
+    {
+      "question_id": "q071",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    {
+      "question_id": "q072",
+      "category": "state_bulletin",
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0
     }
   ]
 }

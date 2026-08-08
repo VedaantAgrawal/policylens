@@ -46,12 +46,14 @@ def build_data() -> dict:
         g = _load(f"generation_{stage_id}")
         if g:
             generation[stage_id] = {m: g["aggregate"][m] for m, _ in GENERATION_METRICS}
+    deltas = _load("stage_deltas") or {}
     return {
         "stages": STAGES,
         "retrieval_metrics": RETRIEVAL_METRICS,
         "generation_metrics": GENERATION_METRICS,
         "retrieval": retrieval,
         "generation": generation,
+        "deltas": deltas,
     }
 
 
@@ -159,21 +161,20 @@ TEMPLATE = """<!doctype html>
     <a href="https://github.com/VedaantAgrawal/policylens" target="_blank" rel="noopener">source on GitHub</a></p>
   <p class="section-note">Every number below is read directly from committed
     <code>eval_results/*.json</code>, regenerated from scratch by <code>make eval</code>
-    (retrieval) and <code>make eval-generation</code> (generation + judge). Bars show the
-    mean; the vertical tick marks show the 95% bootstrap confidence interval (n=30
-    answerable questions, 10,000 resamples).</p>
+    (retrieval + significance tests) and <code>make eval-generation</code> (generation +
+    judge). Bars show the mean; the vertical tick marks show the 95% bootstrap
+    confidence interval (n=60 answerable questions, 10,000 resamples).</p>
 
   <section id="retrieval">
     <h2>Retrieval ablation</h2>
     <p class="section-note">Dense retrieval alone (S1) underperforms the BM25 baseline
-      (S0) on this corpus &mdash; this golden set skews toward precise-terminology
-      questions where exact lexical match beats a small, non-domain-tuned embedding
-      model. Hybrid fusion (S2) recovers the gap; cross-encoder rerank (S3) leads on
-      3 of 4 metrics but its recall@10 actually drops below S2's, since reranking can
-      only reorder S2's fixed top-20 candidate pool, not recover chunks outside it.
-      A paired bootstrap on the S0&rarr;S2 delta shows none of these differences clear
-      95% significance at n=30 &mdash; read the bars as a plausible signal, not a
-      settled result.</p>
+      (S0) on this corpus. Growing the golden set from n=30 to n=60 changed which
+      patterns hold up: at n=30, hybrid fusion (S2) led on every metric and rerank (S3)
+      looked like it traded away recall@10; at n=60, S2's lead is gone on point
+      estimates and S3's recall@10 is now the best of all four stages. The only
+      delta that actually clears 95% significance in a paired bootstrap test is
+      S2&rarr;S3 on recall@5 &mdash; see the table below. Read every other bar as a
+      plausible-but-unconfirmed direction, not a settled result.</p>
     __LEGEND__
     <div class="chart-grid" id="retrieval-charts"></div>
     <details>
@@ -182,13 +183,22 @@ TEMPLATE = """<!doctype html>
     </details>
   </section>
 
+  <section id="deltas">
+    <h2>Paired bootstrap stage deltas</h2>
+    <p class="section-note">The actual significance test, not a proxy for it: paired
+      bootstrap (10k resamples) on the same aligned per-question scores across stage
+      pairs. Bold = clears 95% significance (CI excludes zero).</p>
+    <table id="deltas-table"></table>
+  </section>
+
   <section id="generation">
     <h2>Generation quality</h2>
-    <p class="section-note">Refusal accuracy is identical across all four retrieval
-      stages (11/12 unanswerable questions correctly refused). Every false refusal
-      under S2 was traced by hand: none had the correct source chunk in the retrieved
-      top-5 &mdash; false refusals here are a retrieval-recall ceiling, not the
-      generator being over-cautious with the right context in hand.</p>
+    <p class="section-note">Refusal accuracy sits in a tight band (0.917&ndash;0.958)
+      across all four retrieval stages. Of 22 false refusals traced by hand under S2,
+      21 had no gold chunk in the retrieved top-5 &mdash; a retrieval-recall ceiling,
+      not generator over-caution. The 1 exception had partial retrieval (1 of 2 needed
+      chunks) and the model correctly said so rather than guessing from what it did
+      have &mdash; still correct, calibrated behavior under partial context.</p>
     __LEGEND__
     <div class="chart-grid" id="generation-charts"></div>
     <details>
@@ -198,7 +208,7 @@ TEMPLATE = """<!doctype html>
   </section>
 
   <footer>
-    Corpus: 109 documents (6 SEC 10-Ks, 45 NAIC model laws, 54 NY/CA/TX DOI bulletins).
+    Corpus: 220 documents (33 SEC 10-Ks, 103 NAIC model laws, 84 NY/CA/TX DOI bulletins).
     Generation: claude-sonnet-5. Judge: claude-haiku-4-5.
     &middot; <a href="https://policylens-api.vedaantagrawal.com/health" target="_blank" rel="noopener">live API</a>
   </footer>
@@ -301,6 +311,24 @@ renderChartGrid('retrieval-charts', DATA.retrieval_metrics, DATA.retrieval);
 renderTable('retrieval-table', DATA.retrieval_metrics, DATA.retrieval);
 renderChartGrid('generation-charts', DATA.generation_metrics, DATA.generation);
 renderTable('generation-table', DATA.generation_metrics, DATA.generation);
+
+function renderDeltasTable() {
+  const table = document.getElementById('deltas-table');
+  const thead = document.createElement('thead');
+  thead.innerHTML = '<tr><th>Stage pair</th>' + DATA.retrieval_metrics.map(([, label]) => `<th>${label}</th>`).join('') + '</tr>';
+  table.appendChild(thead);
+  const tbody = document.createElement('tbody');
+  Object.entries(DATA.deltas).forEach(([pair, metrics]) => {
+    const cells = DATA.retrieval_metrics.map(([metricId]) => {
+      const stats = metrics[metricId];
+      const text = `${stats.delta >= 0 ? '+' : ''}${stats.delta.toFixed(3)} [${stats.ci_lower >= 0 ? '+' : ''}${stats.ci_lower.toFixed(3)}, ${stats.ci_upper >= 0 ? '+' : ''}${stats.ci_upper.toFixed(3)}]`;
+      return stats.significant ? `<td class="num"><strong>${text}</strong></td>` : `<td class="num">${text}</td>`;
+    }).join('');
+    tbody.innerHTML += `<tr><td>${pair.replace('->', ' → ')}</td>${cells}</tr>`;
+  });
+  table.appendChild(tbody);
+}
+renderDeltasTable();
 </script>
 </body>
 </html>
