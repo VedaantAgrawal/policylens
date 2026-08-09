@@ -23,3 +23,7 @@ data/processed/
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# React dashboard build artifacts — reproducible via `make dashboard`
+dashboard/node_modules/
+dashboard/dist/

@@ -61,11 +61,13 @@ ablation:
 serve:
 	uv run uvicorn policylens.serving.app:app --host 0.0.0.0 --port 8000
 
-# Renders site/index.html from eval_results/*.json — no hand-typed numbers.
+# Builds the React/Vite/Plotly dashboard (chat view + eval view). Eval
+# numbers are fetched live from the running API's /eval at runtime, not
+# baked in at build time — see dashboard/src/api.js.
 dashboard:
-	uv run python scripts/build_dashboard.py
+	cd dashboard && npm install && npm run build
 
-# Redeploys the static dashboard to Cloudflare Pages (policylens.vedaantagrawal.com).
+# Redeploys the dashboard to Cloudflare Pages (policylens.vedaantagrawal.com).
 # Requires `npx wrangler login` once per machine.
 dashboard-deploy: dashboard
 	npx wrangler deploy
