@@ -162,9 +162,14 @@ data/manifest.jsonl (committed)          data/golden/golden_questions.json (comm
   (federal monetary policy, IRC tax code), double-miss traps (wrong entity *and*
   wrong jurisdiction in one question), and unverifiable operational precision claims.
 - **Model-provider abstraction**: `providers/base.py` defines a one-method
-  `ModelProvider` protocol; `AnthropicProvider` (live) and `BedrockProvider` (real
-  interface, untested — no AWS credentials in this environment) both implement it, so
-  generation/judge code never imports an SDK directly.
+  `ModelProvider` protocol; `AnthropicProvider` and `BedrockProvider` both implement
+  it — verified live against a real AWS account, so generation/judge code never
+  imports an SDK directly. Bedrock goes through `bedrock-runtime` (not the newer
+  `bedrock-mantle` endpoint, which doesn't carry Anthropic models on this account)
+  via a cross-region inference profile ID (`us.anthropic.claude-sonnet-4-6` by
+  default — Sonnet 5 itself is listed as `ACTIVE` in `list_foundation_models` but
+  returns a 403 "not available for this account," an AWS-side entitlement gap on
+  new-model rollout rather than a config issue).
 - **Prompt-injection defense**: retrieved chunk text is wrapped in `<source>` tags
   with an explicit system-prompt instruction to treat it as inert data, never as
   instructions — a chunk containing "ignore prior instructions and..." is
