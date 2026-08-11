@@ -9,7 +9,8 @@ regenerated from scratch by `make eval` (retrieval + significance tests, free) a
 `make eval-generation` (generation + judge, requires an Anthropic API key, ~$2-3 in
 API spend). Nothing here is hand-typed.
 
-**Live:** [interactive dashboard](https://policylens.vedaantagrawal.com) (static, Cloudflare Pages) ·
+**Live:** [interactive dashboard](https://policylens.vedaantagrawal.com) (React/Vite/Plotly,
+chat with the agent + browse the ablation, Cloudflare Pages) ·
 [API](https://policylens-api.vedaantagrawal.com/health) (FastAPI behind a Cloudflare Tunnel to a local Docker container)
 
 ## Results
@@ -126,7 +127,14 @@ data/manifest.jsonl (committed)          data/golden/golden_questions.json (comm
   eval/judge.py (groundedness)                        │
         │                                             ▼
         ▼                                    eval/ablation.py → this README
-  serving/app.py (FastAPI: /query, /eval, /health)
+  agent/tools.py (4 tools) → agent/loop.py
+  (tool_runner, structured trace)
+        │
+        ▼
+  serving/app.py (FastAPI: /query, /agent/query, /eval, /health)
+        │
+        ▼
+  dashboard/ (React/Vite/Plotly: chat view + eval view)
 ```
 
 - **Corpus** (220 docs, ~24,500 chunks — grown from an original 109/~6,500 pass):
@@ -191,8 +199,8 @@ cd policylens
 uv sync
 
 make setup             # fetch corpus (220 docs, ~5 min, needs internet), chunk, embed
-make test               # 74 unit tests, including eval metrics, significance tests,
-                          #   golden-set validation, and PII redaction
+make test               # 89 unit tests, including eval metrics, significance tests,
+                          #   golden-set validation, PII redaction, and agent tools
 make eval               # retrieval ablation + paired significance tests — free, no API key
 make eval-generation     # regenerate generation/groundedness/refusal — needs
                           #   ANTHROPIC_API_KEY in .env, costs ~$2-3 in API spend
@@ -215,7 +223,12 @@ cp .env.example .env   # then fill in ANTHROPIC_API_KEY
 make serve               # FastAPI on :8000
 curl -X POST localhost:8000/query -H "Content-Type: application/json" \
   -d '{"question": "How many days after a premium due date must a policyholder request a paid-up nonforfeiture benefit under the NAIC Standard Nonforfeiture Law?"}'
+curl -X POST localhost:8000/agent/query -H "Content-Type: application/json" \
+  -d '{"question": "Compare how MetLife and Prudential describe their reinsurance recoverables"}'
 ```
+
+To run the dashboard against a local API (`cd dashboard && npm install && npm run dev`,
+proxies to `localhost:8000` by default) — see [`dashboard/README.md`](dashboard/README.md).
 
 ## Known limitations
 
@@ -248,26 +261,46 @@ curl -X POST localhost:8000/query -H "Content-Type: application/json" \
   LLM judge used, then scores agreement with Cohen's kappa. Run it and `--summarize`
   to actually close this gap — the tool doesn't replace a human, it just makes the
   spot-check possible.
-- **Agent/MCP layer is a stub, not a working agent** (see below) — cut deliberately to
-  protect the eval harness under a compressed timeline, per an explicit priority call
-  made when this project was scoped.
+- **The agent layer (`/agent/query`) isn't covered by the ablation or significance
+  tests above** — those measure single-shot `/query` retrieval+generation only. The
+  agent's tool-selection quality (does it call the right tool, does it stop at the
+  right turn) is verified by unit tests on `_build_tools()` and by live manual runs,
+  not by a scored eval set the way retrieval and generation are.
 
-## Agent/MCP layer (design, not implemented)
+## Agent layer
 
-The full architecture called for an MCP server exposing `search_corpus`,
-`fetch_section`, `compare_provisions`, and `extract_numeric_field` tools, with an
-agent loop that plans, calls tools, and synthesizes with a structured trace. Under a
-3-day timeline, this was cut in favor of the eval harness and ablation table — the
-`/query` endpoint above is single-shot retrieval + generation, not a multi-step agent.
-`search_corpus` is a thin wrapper over `HybridRetriever.search`, and is the only piece
-actually stubbed out, to make the cut concrete rather than purely aspirational.
+`/query` is single-shot retrieval + generation. `/agent/query` (and the dashboard's
+chat view) runs a real multi-step agent instead, via the Anthropic SDK's
+`client.beta.messages.tool_runner` — not a hand-rolled loop — over 4 tools defined in
+`agent/tools.py` and wrapped with `@beta_tool` in `agent/loop.py`:
+
+- `search_corpus(query, k)` — thin wrapper over `HybridRetriever.search`
+- `fetch_section(doc_id, section_heading, page)` — pull a specific section once the
+  agent knows which document it needs, rather than re-searching
+- `compare_provisions(doc_ids, aspect, k_per_doc)` — parallel per-document search for
+  side-by-side comparison questions ("how does X differ between issuers A and B")
+- `extract_numeric_field(doc_id, field_description)` — makes its own LLM call
+  (`claude-haiku-4-5`) against fetched text to pull out a specific number, for
+  questions the other three tools can locate but not directly answer
+
+Capped at `MAX_TOOL_TURNS = 8`. Every tool call and result is captured in a structured
+trace (`AgentResult.trace`) that the dashboard renders directly — not just a final
+answer, but the actual plan-call-observe sequence, viewable per query. The same
+prompt-injection defense as `/query` applies: tool results are returned as JSON strings
+and the agent's system prompt treats them as inert data.
+
+The same MCP server used earlier for `search_corpus` alone (`agent/mcp_server.py`) now
+exposes all 4 tools via `CorpusTools`, sharing the same retrieval/generation code paths
+as the FastAPI endpoints — no duplicated logic between the MCP surface and the HTTP API.
 
 ## Tech stack
 
 Python 3.12, `uv` for dependency management, `rank-bm25` for S0, local
 `sentence-transformers` for S1 and S3 (bi-encoder + `ms-marco-MiniLM-L-6-v2`
-cross-encoder, both CPU-friendly and free), FastAPI for serving, the Anthropic API for
-generation/judging (Claude Sonnet 5 + Claude Haiku 4.5), Docker for containerization.
-No vector database — 6,500 chunks fit comfortably in memory as a numpy matrix, and
-introducing one would have been complexity without a measured benefit at this corpus
-size.
+cross-encoder, both CPU-friendly and free), FastAPI for serving, the Anthropic API
+(Claude Sonnet 5 + Claude Haiku 4.5) and AWS Bedrock (`boto3`/`AnthropicBedrock`,
+`us.anthropic.claude-sonnet-4-6`, verified live) behind a shared `ModelProvider`
+abstraction, MCP for the tool-server surface, React + Vite + Plotly for the dashboard,
+Docker for containerization. No vector database — chunks fit comfortably in memory as
+a numpy matrix, and introducing one would have been complexity without a measured
+benefit at this corpus size.
